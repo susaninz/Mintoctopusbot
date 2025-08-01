@@ -1757,8 +1757,16 @@ def main() -> None:
         # Запускаем aiohttp сервер для webhook и health check
         if os.getenv("ENVIRONMENT") == "production":
             port = int(os.getenv("PORT", 8080))
-            asyncio.create_task(start_aiohttp_server(application, port))
-            logger.info(f"🌐 AIOHTTP сервер запускается на порту {port}!")
+            logger.info(f"🌐 Запускаем AIOHTTP сервер на порту {port}...")
+            try:
+                task = asyncio.create_task(start_aiohttp_server(application, port))
+                # Ждем небольшое время чтобы сервер успел запуститься
+                await asyncio.sleep(1)
+                logger.info(f"✅ AIOHTTP сервер запущен на порту {port}!")
+            except Exception as e:
+                logger.error(f"❌ КРИТИЧЕСКАЯ ОШИБКА запуска AIOHTTP сервера: {e}")
+                import traceback
+                traceback.print_exc()
         else:
             logger.info("🔧 Development режим - webhook отключен")
     
