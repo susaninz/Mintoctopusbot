@@ -1686,13 +1686,14 @@ async def process_booking_request(update: Update, context: ContextTypes.DEFAULT_
     except Exception as e:
         logger.error(f"Ошибка отправки уведомления мастеру {master_id}: {e}")
 
-def start_simple_webhook_server(telegram_app, port):
+def start_simple_webhook_server(telegram_app, port, main_loop=None):
     """Запускает простой HTTP сервер для webhook и health check"""
     from http.server import HTTPServer, BaseHTTPRequestHandler
     import threading
     import json
     
     class WebhookHandler(BaseHTTPRequestHandler):
+        main_loop = main_loop  # Сохраняем reference на main event loop
         def do_GET(self):
             if self.path == '/health':
                 self.send_response(200)
@@ -1714,8 +1715,21 @@ def start_simple_webhook_server(telegram_app, port):
                     # Обрабатываем webhook
                     from telegram import Update
                     update = Update.de_json(update_data, telegram_app.bot)
+                    
+                    # Запускаем async функцию из другого thread
                     import asyncio
-                    asyncio.create_task(telegram_app.process_update(update))
+                    import threading
+                    
+                    # Запускаем coroutine в main loop из thread
+                    if self.main_loop:
+                        future = asyncio.run_coroutine_threadsafe(
+                            telegram_app.process_update(update), 
+                            self.main_loop
+                        )
+                        # Можно дождаться результата (опционально)
+                        # future.result(timeout=5.0)
+                    else:
+                        logger.error("❌ Main event loop недоступен!")
                     
                     self.send_response(200)
                     self.end_headers()
@@ -1782,7 +1796,9 @@ def main() -> None:
             port = int(os.getenv("PORT", 8080))
             logger.info(f"🌐 Запускаем простой HTTP сервер на порту {port}...")
             try:
-                start_simple_webhook_server(application, port)
+                # Получаем текущий event loop
+                current_loop = asyncio.get_running_loop()
+                start_simple_webhook_server(application, port, current_loop)
                 # Ждем чтобы сервер успел запуститься
                 await asyncio.sleep(1)
                 logger.info(f"✅ Простой HTTP сервер запущен на порту {port}!")
