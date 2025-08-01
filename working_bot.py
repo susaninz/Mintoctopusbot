@@ -6,6 +6,8 @@ import asyncio
 import logging
 import os
 import json
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import threading
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from telegram import ReplyKeyboardMarkup, Update, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
@@ -1686,6 +1688,68 @@ async def process_booking_request(update: Update, context: ContextTypes.DEFAULT_
     except Exception as e:
         logger.error(f"Ошибка отправки уведомления мастеру {master_id}: {e}")
 
+class SimpleWebhookHandler(BaseHTTPRequestHandler):
+    """Простой HTTP обработчик для webhook и health check"""
+    telegram_app = None
+    
+    def do_GET(self):
+        """Обрабатываем GET запросы (health check)"""
+        if self.path == '/health':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(b'{"status": "ok"}')
+        else:
+            self.send_response(404)
+            self.end_headers()
+    
+    def do_POST(self):
+        """Обрабатываем POST запросы (webhook)"""
+        if self.path == '/webhook':
+            try:
+                # Читаем данные запроса
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length)
+                
+                # Парсим JSON
+                update_data = json.loads(post_data.decode('utf-8'))
+                
+                # Создаем Update объект и передаем в Telegram Application
+                if self.telegram_app:
+                    from telegram import Update
+                    update = Update.de_json(update_data, self.telegram_app.bot)
+                    # Обрабатываем update асинхронно
+                    asyncio.create_task(self.telegram_app.process_update(update))
+                
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(b'OK')
+                
+            except Exception as e:
+                logger.error(f"❌ Ошибка обработки webhook: {e}")
+                self.send_response(500)
+                self.end_headers()
+        else:
+            self.send_response(404)
+            self.end_headers()
+    
+    def log_message(self, format, *args):
+        """Отключаем стандартное логирование HTTP сервера"""
+        pass
+
+def start_simple_http_server(telegram_app, port):
+    """Запускает простой HTTP сервер для webhook"""
+    SimpleWebhookHandler.telegram_app = telegram_app
+    
+    def run_server():
+        server = HTTPServer(('0.0.0.0', port), SimpleWebhookHandler)
+        logger.info(f"🌐 HTTP сервер запущен на порту {port}")
+        server.serve_forever()
+    
+    # Запускаем сервер в отдельном потоке
+    thread = threading.Thread(target=run_server, daemon=True)
+    thread.start()
+
 def main() -> None:
     """Запускает бота."""
     global application_instance, health_checker
@@ -1721,21 +1785,11 @@ def main() -> None:
         scheduler.start()
         logger.info("📅 Планировщик напоминаний запущен!")
         
-        # Запускаем HTTP сервер для webhook и health check
+        # Запускаем простой HTTP сервер для webhook и health check
         if os.getenv("ENVIRONMENT") == "production":
-            try:
-                from health_server import start_health_server, set_telegram_application
-                # Передаем application в health server для обработки webhook
-                set_telegram_application(application)
-                # Railway использует динамический PORT
-                port = int(os.getenv("PORT", 8080))
-                # Запускаем HTTP сервер в фоне
-                asyncio.create_task(start_health_server(port=port))
-                logger.info(f"🌐 HTTP сервер запускается на порту {port} для webhook и health!")
-            except ImportError as e:
-                logger.error(f"❌ Не удалось импортировать health_server: {e}")
-                logger.error("🚨 КРИТИЧНО: БЕЗ HTTP СЕРВЕРА WEBHOOK НЕ РАБОТАЕТ!")
-                raise  # Прерываем запуск если нет HTTP сервера
+            port = int(os.getenv("PORT", 8080))
+            asyncio.create_task(start_simple_http_server(application, port))
+            logger.info(f"🌐 Простой HTTP сервер запускается на порту {port}!")
         else:
             logger.info("🔧 Development режим - webhook отключен")
     
