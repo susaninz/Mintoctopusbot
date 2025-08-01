@@ -1693,7 +1693,7 @@ def start_simple_webhook_server(telegram_app, port, main_loop=None):
     import json
     
     class WebhookHandler(BaseHTTPRequestHandler):
-        main_loop = main_loop  # Сохраняем reference на main event loop
+        event_loop = main_loop  # Сохраняем reference на main event loop
         def do_GET(self):
             if self.path == '/health':
                 self.send_response(200)
@@ -1721,10 +1721,10 @@ def start_simple_webhook_server(telegram_app, port, main_loop=None):
                     import threading
                     
                     # Запускаем coroutine в main loop из thread
-                    if self.main_loop:
+                    if self.event_loop:
                         future = asyncio.run_coroutine_threadsafe(
                             telegram_app.process_update(update), 
-                            self.main_loop
+                            self.event_loop
                         )
                         # Можно дождаться результата (опционально)
                         # future.result(timeout=5.0)
