@@ -80,7 +80,7 @@ async def create_health_app():
     app = web.Application()
     app.router.add_get('/health', health_endpoint)
     app.router.add_get('/', root_endpoint)
-    app.router.add_post('/', webhook_endpoint)  # Webhook endpoint
+    app.router.add_post('/webhook', webhook_endpoint)  # Правильный webhook endpoint
     return app
 
 async def start_health_server(port=8080):
