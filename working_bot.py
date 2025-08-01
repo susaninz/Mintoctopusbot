@@ -1721,8 +1721,23 @@ def main() -> None:
         scheduler.start()
         logger.info("📅 Планировщик напоминаний запущен!")
         
-        # Пока отключаем health server для тестирования
-        logger.info("⚠️ Health server временно отключен для отладки webhook")
+        # Запускаем HTTP сервер для webhook и health check
+        if os.getenv("ENVIRONMENT") == "production":
+            try:
+                from health_server import start_health_server, set_telegram_application
+                # Передаем application в health server для обработки webhook
+                set_telegram_application(application)
+                # Railway использует динамический PORT
+                port = int(os.getenv("PORT", 8080))
+                # Запускаем HTTP сервер в фоне
+                asyncio.create_task(start_health_server(port=port))
+                logger.info(f"🌐 HTTP сервер запускается на порту {port} для webhook и health!")
+            except ImportError as e:
+                logger.error(f"❌ Не удалось импортировать health_server: {e}")
+                logger.error("🚨 КРИТИЧНО: БЕЗ HTTP СЕРВЕРА WEBHOOK НЕ РАБОТАЕТ!")
+                raise  # Прерываем запуск если нет HTTP сервера
+        else:
+            logger.info("🔧 Development режим - webhook отключен")
     
     async def post_stop(application):
         """Очистка при остановке."""
