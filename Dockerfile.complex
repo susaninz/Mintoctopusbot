@@ -1,0 +1,55 @@
+# Многоступенчатая сборка для минимизации размера образа
+FROM python:3.11-slim as builder
+
+# Установка системных зависимостей
+RUN apt-get update && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Создание виртуального окружения
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Копирование requirements
+COPY requirements.txt requirements-dev.txt ./
+
+# Установка Python зависимостей
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+# Финальный образ
+FROM python:3.11-slim
+
+# Создание пользователя без root привилегий
+RUN groupadd -r botuser && useradd -r -g botuser botuser
+
+# Копирование виртуального окружения
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Установка рабочей директории
+WORKDIR /app
+
+# Копирование кода приложения
+COPY --chown=botuser:botuser . .
+
+# Создание директории для данных
+RUN mkdir -p /app/data && chown botuser:botuser /app/data
+
+# Переключение на non-root пользователя
+USER botuser
+
+# Переменные окружения
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+ENV ENVIRONMENT=production
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import requests; requests.get('http://localhost:8080/health', timeout=5)" || exit 1
+
+# Экспонирование порта для health checks
+EXPOSE 8080
+
+# Запуск приложения
+CMD ["python", "working_bot.py"]

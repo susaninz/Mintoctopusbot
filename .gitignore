@@ -1,0 +1,40 @@
+# Environment variables
+.env
+.env.local
+.env.backup
+
+# Logs
+*.log
+bot.log
+bot_secure.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# CSV data files
+*.csv
+
+# Temporary files  
+*.tmp
+*.temp
+
+# Notifications
+client_notifications*.json
+
+# Fly.io files
+fly.toml.bak
+
+# Scripts
+setup_fly.sh
+deploy_to_fly.sh
