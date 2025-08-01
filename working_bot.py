@@ -1667,6 +1667,9 @@ def main() -> None:
         
         # Запускаем health check сервер в production
         if os.getenv("ENVIRONMENT") == "production":
+            from health_server import set_telegram_application
+            # Передаем application в health server для обработки webhook
+            set_telegram_application(application)
             await start_health_server(port=8080)
             logger.info("🏥 Health check сервер запущен!")
     
@@ -1678,7 +1681,42 @@ def main() -> None:
     application.post_init = post_init
     application.post_stop = post_stop
     
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    # Выбираем режим в зависимости от окружения
+    if os.getenv("ENVIRONMENT") == "production":
+        # Production: запускаем через webhook
+        logger.info("🚀 Запускаем бот в production режиме (webhook)")
+        
+        # Запускаем application с webhook режимом
+        # post_init уже настроен выше и запустит health server
+        import signal
+        import asyncio
+        
+        stop_event = asyncio.Event()
+        
+        def signal_handler():
+            logger.info("Получен сигнал остановки")
+            stop_event.set()
+        
+        # Регистрируем обработчики сигналов
+        loop = asyncio.get_event_loop()
+        for sig in [signal.SIGTERM, signal.SIGINT]:
+            loop.add_signal_handler(sig, signal_handler)
+        
+        try:
+            # Запускаем приложение
+            await application.initialize()
+            await application.start()
+            
+            # Ждем сигнала остановки
+            await stop_event.wait()
+            
+        finally:
+            await application.stop()
+            await application.shutdown()
+    else:
+        # Development: используем polling
+        logger.info("🔧 Запускаем бот в development режиме (polling)")
+        application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 # === ФУНКЦИИ ДЛЯ ПРОСМОТРА СВОБОДНЫХ СЛОТОВ ===
 
