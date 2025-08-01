@@ -49,12 +49,15 @@ class HealthChecker:
     
     def check_env_vars(self) -> dict:
         """Проверяет наличие необходимых переменных окружения"""
-        required_vars = ['BOT_TOKEN', 'OPENAI_API_KEY']
-        missing_vars = []
+        # Проверяем BOT_TOKEN или TELEGRAM_TOKEN (fallback)
+        bot_token = os.getenv("BOT_TOKEN") or os.getenv("TELEGRAM_TOKEN")
+        openai_key = os.getenv("OPENAI_API_KEY")
         
-        for var in required_vars:
-            if not os.getenv(var):
-                missing_vars.append(var)
+        missing_vars = []
+        if not bot_token:
+            missing_vars.append("BOT_TOKEN (or TELEGRAM_TOKEN)")
+        if not openai_key:
+            missing_vars.append("OPENAI_API_KEY")
         
         if missing_vars:
             return {
