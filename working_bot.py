@@ -1686,38 +1686,61 @@ async def process_booking_request(update: Update, context: ContextTypes.DEFAULT_
     except Exception as e:
         logger.error(f"Ошибка отправки уведомления мастеру {master_id}: {e}")
 
-async def start_aiohttp_server(telegram_app, port):
-    """Запускает aiohttp сервер для webhook и health check"""
-    from aiohttp import web
-    from telegram import Update
+def start_simple_webhook_server(telegram_app, port):
+    """Запускает простой HTTP сервер для webhook и health check"""
+    from http.server import HTTPServer, BaseHTTPRequestHandler
+    import threading
+    import json
     
-    async def health_handler(request):
-        """Health check endpoint"""
-        return web.json_response({"status": "ok"})
+    class WebhookHandler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            if self.path == '/health':
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(b'{"status": "ok"}')
+                logger.info("✅ Health check запрос обработан")
+            else:
+                self.send_response(404)
+                self.end_headers()
+        
+        def do_POST(self):
+            if self.path == '/webhook':
+                try:
+                    content_length = int(self.headers.get('Content-Length', 0))
+                    post_data = self.rfile.read(content_length)
+                    update_data = json.loads(post_data.decode('utf-8'))
+                    
+                    # Обрабатываем webhook
+                    from telegram import Update
+                    update = Update.de_json(update_data, telegram_app.bot)
+                    import asyncio
+                    asyncio.create_task(telegram_app.process_update(update))
+                    
+                    self.send_response(200)
+                    self.end_headers()
+                    self.wfile.write(b'OK')
+                    logger.info("✅ Webhook запрос обработан")
+                    
+                except Exception as e:
+                    logger.error(f"❌ Ошибка webhook: {e}")
+                    self.send_response(500)
+                    self.end_headers()
+            else:
+                self.send_response(404)
+                self.end_headers()
+        
+        def log_message(self, format, *args):
+            pass  # Отключаем стандартные логи
     
-    async def webhook_handler(request):
-        """Webhook endpoint для обработки сообщений Telegram"""
-        try:
-            update_data = await request.json()
-            update = Update.de_json(update_data, telegram_app.bot)
-            # Обрабатываем update асинхронно
-            await telegram_app.process_update(update)
-            return web.Response(text='OK')
-        except Exception as e:
-            logger.error(f"❌ Ошибка обработки webhook: {e}")
-            return web.Response(status=500)
+    def run_server():
+        server = HTTPServer(('0.0.0.0', port), WebhookHandler)
+        logger.info(f"🌐 HTTP сервер запущен на порту {port}")
+        server.serve_forever()
     
-    # Создаем приложение aiohttp
-    app = web.Application()
-    app.router.add_get('/health', health_handler)
-    app.router.add_post('/webhook', webhook_handler)
-    
-    # Запускаем сервер
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, '0.0.0.0', port)
-    await site.start()
-    logger.info(f"🌐 AIOHTTP сервер запущен на порту {port}")
+    thread = threading.Thread(target=run_server, daemon=True)
+    thread.start()
+    logger.info(f"🚀 HTTP сервер поток запущен на порту {port}")
 
 def main() -> None:
     """Запускает бота."""
@@ -1757,14 +1780,14 @@ def main() -> None:
         # Запускаем aiohttp сервер для webhook и health check
         if os.getenv("ENVIRONMENT") == "production":
             port = int(os.getenv("PORT", 8080))
-            logger.info(f"🌐 Запускаем AIOHTTP сервер на порту {port}...")
+            logger.info(f"🌐 Запускаем простой HTTP сервер на порту {port}...")
             try:
-                task = asyncio.create_task(start_aiohttp_server(application, port))
-                # Ждем небольшое время чтобы сервер успел запуститься
+                start_simple_webhook_server(application, port)
+                # Ждем чтобы сервер успел запуститься
                 await asyncio.sleep(1)
-                logger.info(f"✅ AIOHTTP сервер запущен на порту {port}!")
+                logger.info(f"✅ Простой HTTP сервер запущен на порту {port}!")
             except Exception as e:
-                logger.error(f"❌ КРИТИЧЕСКАЯ ОШИБКА запуска AIOHTTP сервера: {e}")
+                logger.error(f"❌ КРИТИЧЕСКАЯ ОШИБКА запуска HTTP сервера: {e}")
                 import traceback
                 traceback.print_exc()
         else:
