@@ -1727,8 +1727,9 @@ def main() -> None:
             set_telegram_application(application)
             # Railway использует динамический PORT
             port = int(os.getenv("PORT", 8080))
-            await start_health_server(port=port)
-            logger.info("🏥 Health check сервер запущен!")
+            # Запускаем health server в фоне
+            asyncio.create_task(start_health_server(port=port))
+            logger.info(f"🏥 Health check сервер запускается на порту {port}!")
     
     async def post_stop(application):
         """Очистка при остановке."""
