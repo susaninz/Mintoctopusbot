@@ -2,6 +2,7 @@
 """
 Рабочая версия бота с полным функционалом (без GPT для упрощения)
 """
+import asyncio
 import logging
 import os
 import json
