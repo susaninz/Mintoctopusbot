@@ -6,8 +6,6 @@ import asyncio
 import logging
 import os
 import json
-from http.server import HTTPServer, BaseHTTPRequestHandler
-import threading
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from telegram import ReplyKeyboardMarkup, Update, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
@@ -1688,67 +1686,38 @@ async def process_booking_request(update: Update, context: ContextTypes.DEFAULT_
     except Exception as e:
         logger.error(f"Ошибка отправки уведомления мастеру {master_id}: {e}")
 
-class SimpleWebhookHandler(BaseHTTPRequestHandler):
-    """Простой HTTP обработчик для webhook и health check"""
-    telegram_app = None
+async def start_aiohttp_server(telegram_app, port):
+    """Запускает aiohttp сервер для webhook и health check"""
+    from aiohttp import web
+    from telegram import Update
     
-    def do_GET(self):
-        """Обрабатываем GET запросы (health check)"""
-        if self.path == '/health':
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(b'{"status": "ok"}')
-        else:
-            self.send_response(404)
-            self.end_headers()
+    async def health_handler(request):
+        """Health check endpoint"""
+        return web.json_response({"status": "ok"})
     
-    def do_POST(self):
-        """Обрабатываем POST запросы (webhook)"""
-        if self.path == '/webhook':
-            try:
-                # Читаем данные запроса
-                content_length = int(self.headers.get('Content-Length', 0))
-                post_data = self.rfile.read(content_length)
-                
-                # Парсим JSON
-                update_data = json.loads(post_data.decode('utf-8'))
-                
-                # Создаем Update объект и передаем в Telegram Application
-                if self.telegram_app:
-                    from telegram import Update
-                    update = Update.de_json(update_data, self.telegram_app.bot)
-                    # Обрабатываем update асинхронно
-                    asyncio.create_task(self.telegram_app.process_update(update))
-                
-                self.send_response(200)
-                self.end_headers()
-                self.wfile.write(b'OK')
-                
-            except Exception as e:
-                logger.error(f"❌ Ошибка обработки webhook: {e}")
-                self.send_response(500)
-                self.end_headers()
-        else:
-            self.send_response(404)
-            self.end_headers()
+    async def webhook_handler(request):
+        """Webhook endpoint для обработки сообщений Telegram"""
+        try:
+            update_data = await request.json()
+            update = Update.de_json(update_data, telegram_app.bot)
+            # Обрабатываем update асинхронно
+            await telegram_app.process_update(update)
+            return web.Response(text='OK')
+        except Exception as e:
+            logger.error(f"❌ Ошибка обработки webhook: {e}")
+            return web.Response(status=500)
     
-    def log_message(self, format, *args):
-        """Отключаем стандартное логирование HTTP сервера"""
-        pass
-
-def start_simple_http_server(telegram_app, port):
-    """Запускает простой HTTP сервер для webhook"""
-    SimpleWebhookHandler.telegram_app = telegram_app
+    # Создаем приложение aiohttp
+    app = web.Application()
+    app.router.add_get('/health', health_handler)
+    app.router.add_post('/webhook', webhook_handler)
     
-    def run_server():
-        server = HTTPServer(('0.0.0.0', port), SimpleWebhookHandler)
-        logger.info(f"🌐 HTTP сервер запущен на порту {port}")
-        server.serve_forever()
-    
-    # Запускаем сервер в отдельном потоке
-    thread = threading.Thread(target=run_server, daemon=True)
-    thread.start()
+    # Запускаем сервер
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, '0.0.0.0', port)
+    await site.start()
+    logger.info(f"🌐 AIOHTTP сервер запущен на порту {port}")
 
 def main() -> None:
     """Запускает бота."""
@@ -1785,11 +1754,11 @@ def main() -> None:
         scheduler.start()
         logger.info("📅 Планировщик напоминаний запущен!")
         
-        # Запускаем простой HTTP сервер для webhook и health check
+        # Запускаем aiohttp сервер для webhook и health check
         if os.getenv("ENVIRONMENT") == "production":
             port = int(os.getenv("PORT", 8080))
-            asyncio.create_task(start_simple_http_server(application, port))
-            logger.info(f"🌐 Простой HTTP сервер запускается на порту {port}!")
+            asyncio.create_task(start_aiohttp_server(application, port))
+            logger.info(f"🌐 AIOHTTP сервер запускается на порту {port}!")
         else:
             logger.info("🔧 Development режим - webhook отключен")
     
