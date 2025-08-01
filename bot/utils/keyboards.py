@@ -180,15 +180,27 @@ def count_available_slots(master: dict) -> int:
     slots = master.get("time_slots", [])
     bookings = master.get("bookings", [])
     
-    # Получаем текущую дату
-    today = datetime.now().date().strftime("%Y-%m-%d")
+    # Получаем текущее время
+    now = datetime.now()
     
     available_count = 0
     for slot in slots:
         slot_date = slot.get("date")
+        slot_start_time = slot.get("start_time")
         
-        # Показываем только будущие слоты (включая сегодняшние)
-        if slot_date and slot_date < today:
+        if not slot_date or not slot_start_time:
+            continue
+            
+        try:
+            # Создаем datetime объект для сравнения
+            slot_datetime = datetime.strptime(f"{slot_date} {slot_start_time}", "%Y-%m-%d %H:%M")
+            
+            # Показываем только будущие слоты
+            if slot_datetime <= now:
+                continue
+                
+        except ValueError:
+            # Если не можем распарсить время, пропускаем слот
             continue
             
         # Проверяем, не забронирован ли слот

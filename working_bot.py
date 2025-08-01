@@ -264,7 +264,34 @@ async def test_reminder(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
 async def show_slots_with_management(update: Update, context: ContextTypes.DEFAULT_TYPE, master: dict):
     """Показывает слоты мастера с кнопками управления."""
-    slots = master.get("time_slots", [])
+    from datetime import datetime
+    
+    all_slots = master.get("time_slots", [])
+    
+    # Фильтруем только будущие слоты
+    now = datetime.now()
+    slots = []
+    for slot in all_slots:
+        slot_date = slot.get("date")
+        slot_start_time = slot.get("start_time")
+        
+        if not slot_date or not slot_start_time:
+            continue
+            
+        try:
+            slot_datetime = datetime.strptime(f"{slot_date} {slot_start_time}", "%Y-%m-%d %H:%M")
+            if slot_datetime > now:
+                slots.append(slot)
+        except ValueError:
+            continue
+    
+    if not slots:
+        await update.message.reply_text(
+            "📭 У тебя нет активных слотов.\n\n"
+            "Все прошедшие слоты автоматически скрыты. "
+            "Используй 'Добавить слоты ➕' чтобы создать новые!"
+        )
+        return
     
     for i, slot in enumerate(slots):
         slot_text = (
@@ -1312,15 +1339,27 @@ def count_available_slots(master: dict) -> int:
     slots = master.get("time_slots", [])
     bookings = master.get("bookings", [])
     
-    # Получаем текущую дату
-    today = datetime.now().date().strftime("%Y-%m-%d")
+    # Получаем текущее время
+    now = datetime.now()
     
     available_count = 0
     for slot in slots:
         slot_date = slot.get("date")
+        slot_start_time = slot.get("start_time")
         
-        # Показываем только будущие слоты (включая сегодняшние)
-        if slot_date and slot_date < today:
+        if not slot_date or not slot_start_time:
+            continue
+            
+        try:
+            # Создаем datetime объект для сравнения
+            slot_datetime = datetime.strptime(f"{slot_date} {slot_start_time}", "%Y-%m-%d %H:%M")
+            
+            # Показываем только будущие слоты (включая запас 30 минут)
+            if slot_datetime <= now:
+                continue
+                
+        except ValueError:
+            # Если не можем распарсить время, пропускаем слот
             continue
             
         # Проверяем, не забронирован ли слот
@@ -1762,6 +1801,16 @@ async def show_slots_by_date(update: Update, context: ContextTypes.DEFAULT_TYPE,
         for slot in master.get("time_slots", []):
             if slot.get("date") != selected_date:
                 continue
+            
+            # Проверяем, что слот еще не прошел (для сегодняшней даты)
+            slot_start_time = slot.get("start_time")
+            if slot_start_time:
+                try:
+                    slot_datetime = datetime.strptime(f"{selected_date} {slot_start_time}", "%Y-%m-%d %H:%M")
+                    if slot_datetime <= datetime.now():
+                        continue  # Пропускаем прошедшие слоты
+                except ValueError:
+                    continue
             
             # Проверяем, не занят ли слот
             is_booked = any(
