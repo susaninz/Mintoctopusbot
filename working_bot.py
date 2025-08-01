@@ -1828,6 +1828,10 @@ def main() -> None:
                 await application.initialize()
                 await application.start()
                 
+                # КРИТИЧНО: Вызываем post_init вручную в production!
+                logger.info("🔧 Вызываем post_init для запуска HTTP сервера...")
+                await post_init(application)
+                
                 # Ждем сигнала остановки
                 await stop_event.wait()
                 
