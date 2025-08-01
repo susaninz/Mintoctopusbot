@@ -1725,7 +1725,9 @@ def main() -> None:
         if os.getenv("ENVIRONMENT") == "production":
             # Передаем application в health server для обработки webhook
             set_telegram_application(application)
-            await start_health_server(port=8080)
+            # Railway использует динамический PORT
+            port = int(os.getenv("PORT", 8080))
+            await start_health_server(port=port)
             logger.info("🏥 Health check сервер запущен!")
     
     async def post_stop(application):
