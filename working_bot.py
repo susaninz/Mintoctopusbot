@@ -1721,20 +1721,8 @@ def main() -> None:
         scheduler.start()
         logger.info("📅 Планировщик напоминаний запущен!")
         
-        # Запускаем health check сервер в production
-        if os.getenv("ENVIRONMENT") == "production":
-            try:
-                from health_server import start_health_server, set_telegram_application
-                # Передаем application в health server для обработки webhook
-                set_telegram_application(application)
-                # Railway использует динамический PORT
-                port = int(os.getenv("PORT", 8080))
-                # Запускаем health server в фоне
-                asyncio.create_task(start_health_server(port=port))
-                logger.info(f"🏥 Health check сервер запускается на порту {port}!")
-            except ImportError as e:
-                logger.error(f"❌ Не удалось импортировать health_server: {e}")
-                logger.error("⚠️ Бот будет работать без health check сервера")
+        # Пока отключаем health server для тестирования
+        logger.info("⚠️ Health server временно отключен для отладки webhook")
     
     async def post_stop(application):
         """Очистка при остановке."""
