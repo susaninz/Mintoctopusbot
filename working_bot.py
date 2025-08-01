@@ -18,7 +18,7 @@ from utils import format_date_for_user, format_slot_for_user, format_slots_list
 from bot_middleware import with_error_handling, with_rate_limiting, telegram_retry
 from secure_logger import setup_secure_logging, secure_log_user_action
 from health_check import init_health_checker
-# from health_server import start_health_server  # Отключено для локального тестирования
+from health_server import start_health_server, set_telegram_application
 
 # Загружаем переменные окружения
 load_dotenv()
@@ -1723,10 +1723,9 @@ def main() -> None:
         
         # Запускаем health check сервер в production
         if os.getenv("ENVIRONMENT") == "production":
-            from health_server import set_telegram_application
             # Передаем application в health server для обработки webhook
             set_telegram_application(application)
-            # await start_health_server(port=8080)  # Отключено для локального тестирования
+            await start_health_server(port=8080)
             logger.info("🏥 Health check сервер запущен!")
     
     async def post_stop(application):
