@@ -18,7 +18,7 @@ from utils import format_date_for_user, format_slot_for_user, format_slots_list
 from bot_middleware import with_error_handling, with_rate_limiting, telegram_retry
 from secure_logger import setup_secure_logging, secure_log_user_action
 from health_check import init_health_checker
-from health_server import start_health_server, set_telegram_application
+# from health_server import start_health_server, set_telegram_application  # Импортируем только в production
 
 # Загружаем переменные окружения
 load_dotenv()
@@ -1723,13 +1723,18 @@ def main() -> None:
         
         # Запускаем health check сервер в production
         if os.getenv("ENVIRONMENT") == "production":
-            # Передаем application в health server для обработки webhook
-            set_telegram_application(application)
-            # Railway использует динамический PORT
-            port = int(os.getenv("PORT", 8080))
-            # Запускаем health server в фоне
-            asyncio.create_task(start_health_server(port=port))
-            logger.info(f"🏥 Health check сервер запускается на порту {port}!")
+            try:
+                from health_server import start_health_server, set_telegram_application
+                # Передаем application в health server для обработки webhook
+                set_telegram_application(application)
+                # Railway использует динамический PORT
+                port = int(os.getenv("PORT", 8080))
+                # Запускаем health server в фоне
+                asyncio.create_task(start_health_server(port=port))
+                logger.info(f"🏥 Health check сервер запускается на порту {port}!")
+            except ImportError as e:
+                logger.error(f"❌ Не удалось импортировать health_server: {e}")
+                logger.error("⚠️ Бот будет работать без health check сервера")
     
     async def post_stop(application):
         """Очистка при остановке."""
