@@ -27,9 +27,26 @@ def emergency_restore():
         logger.info(f"📁 Creating volume directory: {volume_path}")
         os.makedirs(volume_path, exist_ok=True)
     
-    # Данные для восстановления из последних известных рабочих версий
-    restore_data = {
-        "database.json": '''
+    # Проверяем есть ли локальная копия РЕАЛЬНЫХ данных
+    local_database_path = "data/database.json"
+    if os.path.exists(local_database_path):
+        logger.info(f"📁 Найден локальный database.json, копируем реальные данные...")
+        try:
+            with open(local_database_path, 'r', encoding='utf-8') as f:
+                real_database_content = f.read()
+            # Проверяем что это валидный JSON
+            json.loads(real_database_content)
+            logger.info(f"✅ Локальные данные валидны ({len(real_database_content)} символов)")
+            
+            # Используем реальные данные
+            restore_data = {
+                "database.json": real_database_content,
+            }
+        except Exception as e:
+            logger.error(f"❌ Ошибка чтения локальных данных: {e}")
+            # Fallback к минимальным данным
+            restore_data = {
+                "database.json": '''
 {
   "masters": [
     {
@@ -49,11 +66,38 @@ def emergency_restore():
     }
   ]
 }''',
-        "bug_reports.json": '''
+            }
+    else:
+        logger.warning("⚠️ Локальный database.json не найден, используем минимальные данные")
+        # Данные для восстановления из последних известных рабочих версий
+        restore_data = {
+            "database.json": '''
+{
+  "masters": [
+    {
+      "name": "Иван Слёзкин",
+      "username": "@ivanslyozkin",
+      "profile": "Опытный мастер",
+      "slots": []
+    }
+  ],
+  "bookings": [],
+  "devices": [
+    {
+      "name": "Виброкресло",
+      "owner": "@fshubin",
+      "admin": true,
+      "slots": []
+    }
+  ]
+}''',
+            }
+    
+    # Всегда добавляем bug_reports.json  
+    restore_data["bug_reports.json"] = '''
 {
   "reports": []
 }'''
-    }
     
     logger.info("📋 Restoring critical data files...")
     
