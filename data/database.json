@@ -538,55 +538,73 @@
           "date": "2025-08-02",
           "start_time": "09:00",
           "end_time": "10:00",
-          "is_booked": false
+          "is_booked": true,
+          "booked_by": "@fshubin",
+          "booking_id": "dc28a193-051a-4fd5-9174-c622c830c3e5"
         },
         {
           "date": "2025-08-02",
           "start_time": "10:00",
           "end_time": "11:00",
-          "is_booked": false
+          "is_booked": true,
+          "booked_by": "@kbabat",
+          "booking_id": "86c860fa-cdce-4838-9d7f-0465a5987136"
         },
         {
           "date": "2025-08-02",
           "start_time": "11:00",
           "end_time": "12:00",
-          "is_booked": false
+          "is_booked": true,
+          "booked_by": "@kksusha",
+          "booking_id": "2c856bd2-a6a6-4e14-b59c-e4ee6f843cbf"
         },
         {
           "date": "2025-08-02",
           "start_time": "12:00",
           "end_time": "13:00",
-          "is_booked": false
+          "is_booked": true,
+          "booked_by": "@vonkopfbisfuss",
+          "booking_id": "404de438-8a8b-4bac-9cb8-9d19922d2194"
         },
         {
           "date": "2025-08-02",
           "start_time": "13:00",
           "end_time": "14:00",
-          "is_booked": false
+          "is_booked": true,
+          "booked_by": "@simplelifeform",
+          "booking_id": "4918d6ca-726e-4b56-96bc-6046b30d2d2c"
         },
         {
           "date": "2025-08-02",
           "start_time": "14:00",
           "end_time": "15:00",
-          "is_booked": false
+          "is_booked": true,
+          "booked_by": "@starost",
+          "booking_id": "428e59f6-7c75-448b-98a5-d6119a4a65e4"
         },
         {
           "date": "2025-08-02",
           "start_time": "15:00",
           "end_time": "16:00",
-          "is_booked": false
+          "is_booked": true,
+          "booked_by": "@kirabelykh",
+          "booking_id": "a2d0b914-09d1-466e-8297-ff2fb14c87de"
         },
         {
           "date": "2025-08-02",
           "start_time": "16:00",
           "end_time": "17:00",
-          "is_booked": false
+          "is_booked": true,
+          "booked_by": "@vprovizion",
+          "booking_id": "b89f5abc-71a5-44ac-8e2a-061557da93ff"
         },
         {
           "date": "2025-08-02",
           "start_time": "17:00",
           "end_time": "18:00",
-          "is_booked": false
+          "is_booked": true,
+          "booked_by": "@impresariooooo",
+          "booking_id": "d4697b53-4e63-443d-be89-2bdfd55773e9"
         },
         {
           "date": "2025-08-02",
@@ -5487,5 +5505,132 @@
       ]
     }
   ],
-  "device_bookings": []
+  "device_bookings": [
+    {
+      "booking_id": "86c860fa-cdce-4838-9d7f-0465a5987136",
+      "device_id": "vibro_chair",
+      "slot_index": 14,
+      "guest_username": "@kbabat",
+      "guest_telegram_id": null,
+      "date": "2025-08-02",
+      "start_time": "10:00",
+      "end_time": "11:00",
+      "status": "confirmed",
+      "created_at": "2025-08-02T10:37:11.700744",
+      "migrated_from": "phil_table",
+      "notes": "Migrated from Фил's emergency table due to bot downtime"
+    },
+    {
+      "booking_id": "2c856bd2-a6a6-4e14-b59c-e4ee6f843cbf",
+      "device_id": "vibro_chair",
+      "slot_index": 15,
+      "guest_username": "@kksusha",
+      "guest_telegram_id": null,
+      "date": "2025-08-02",
+      "start_time": "11:00",
+      "end_time": "12:00",
+      "status": "confirmed",
+      "created_at": "2025-08-02T10:37:11.700944",
+      "migrated_from": "phil_table",
+      "notes": "Migrated from Фил's emergency table due to bot downtime"
+    },
+    {
+      "booking_id": "404de438-8a8b-4bac-9cb8-9d19922d2194",
+      "device_id": "vibro_chair",
+      "slot_index": 16,
+      "guest_username": "@vonkopfbisfuss",
+      "guest_telegram_id": null,
+      "date": "2025-08-02",
+      "start_time": "12:00",
+      "end_time": "13:00",
+      "status": "confirmed",
+      "created_at": "2025-08-02T10:37:11.700958",
+      "migrated_from": "phil_table",
+      "notes": "Migrated from Фил's emergency table due to bot downtime"
+    },
+    {
+      "booking_id": "4918d6ca-726e-4b56-96bc-6046b30d2d2c",
+      "device_id": "vibro_chair",
+      "slot_index": 17,
+      "guest_username": "@simplelifeform",
+      "guest_telegram_id": null,
+      "date": "2025-08-02",
+      "start_time": "13:00",
+      "end_time": "14:00",
+      "status": "confirmed",
+      "created_at": "2025-08-02T10:37:11.700968",
+      "migrated_from": "phil_table",
+      "notes": "Migrated from Фил's emergency table due to bot downtime"
+    },
+    {
+      "booking_id": "428e59f6-7c75-448b-98a5-d6119a4a65e4",
+      "device_id": "vibro_chair",
+      "slot_index": 18,
+      "guest_username": "@starost",
+      "guest_telegram_id": null,
+      "date": "2025-08-02",
+      "start_time": "14:00",
+      "end_time": "15:00",
+      "status": "confirmed",
+      "created_at": "2025-08-02T10:37:11.700978",
+      "migrated_from": "phil_table",
+      "notes": "Migrated from Фил's emergency table due to bot downtime"
+    },
+    {
+      "booking_id": "a2d0b914-09d1-466e-8297-ff2fb14c87de",
+      "device_id": "vibro_chair",
+      "slot_index": 19,
+      "guest_username": "@kirabelykh",
+      "guest_telegram_id": null,
+      "date": "2025-08-02",
+      "start_time": "15:00",
+      "end_time": "16:00",
+      "status": "confirmed",
+      "created_at": "2025-08-02T10:37:11.700987",
+      "migrated_from": "phil_table",
+      "notes": "Migrated from Фил's emergency table due to bot downtime"
+    },
+    {
+      "booking_id": "b89f5abc-71a5-44ac-8e2a-061557da93ff",
+      "device_id": "vibro_chair",
+      "slot_index": 20,
+      "guest_username": "@vprovizion",
+      "guest_telegram_id": null,
+      "date": "2025-08-02",
+      "start_time": "16:00",
+      "end_time": "17:00",
+      "status": "confirmed",
+      "created_at": "2025-08-02T10:37:11.700997",
+      "migrated_from": "phil_table",
+      "notes": "Migrated from Фил's emergency table due to bot downtime"
+    },
+    {
+      "booking_id": "d4697b53-4e63-443d-be89-2bdfd55773e9",
+      "device_id": "vibro_chair",
+      "slot_index": 21,
+      "guest_username": "@impresariooooo",
+      "guest_telegram_id": null,
+      "date": "2025-08-02",
+      "start_time": "17:00",
+      "end_time": "18:00",
+      "status": "confirmed",
+      "created_at": "2025-08-02T10:37:11.701006",
+      "migrated_from": "phil_table",
+      "notes": "Migrated from Фил's emergency table due to bot downtime"
+    },
+    {
+      "booking_id": "dc28a193-051a-4fd5-9174-c622c830c3e5",
+      "device_id": "vibro_chair",
+      "slot_index": 13,
+      "guest_username": "@fshubin",
+      "guest_telegram_id": null,
+      "date": "2025-08-02",
+      "start_time": "09:00",
+      "end_time": "10:00",
+      "status": "confirmed",
+      "created_at": "2025-08-02T10:38:57.475739",
+      "migrated_from": "phil_table",
+      "notes": "Migrated from Фил's emergency table due to bot downtime - manually fixed"
+    }
+  ]
 }
