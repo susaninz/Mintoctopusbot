@@ -365,12 +365,25 @@ class GPTService:
             Список слотов или пустой список если не удалось распарсить
         """
         try:
-            from utils.timezone_utils import get_relative_date_info
-            import re
+            # Безопасный импорт с fallback
+            try:
+                from utils.timezone_utils import get_relative_date_info
+                time_info = get_relative_date_info()
+                today_date = time_info['current_date']
+                tomorrow_date = time_info['tomorrow_date']
+                logger.info("✅ timezone_utils импорт успешен")
+            except Exception as tz_error:
+                logger.error(f"❌ timezone_utils импорт провален: {tz_error}")
+                # Fallback даты
+                from datetime import datetime, timedelta
+                import pytz
+                moscow_tz = pytz.timezone('Europe/Moscow')
+                now = datetime.now(moscow_tz)
+                today_date = now.strftime('%Y-%m-%d')
+                tomorrow_date = (now + timedelta(days=1)).strftime('%Y-%m-%d')
+                logger.info(f"✅ Fallback даты: сегодня={today_date}, завтра={tomorrow_date}")
             
-            time_info = get_relative_date_info()
-            today_date = time_info['current_date']
-            tomorrow_date = time_info['tomorrow_date']
+            import re
             
             slots = []
             text_lower = slots_text.lower()

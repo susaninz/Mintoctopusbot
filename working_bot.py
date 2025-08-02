@@ -399,9 +399,16 @@ async def process_add_slots(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         )
         
     except Exception as e:
-        logger.error(f"Ошибка при добавлении слотов: {e}")
+        # Детальное логирование для диагностики
+        logger.error(f"ДЕТАЛЬНАЯ ОШИБКА при добавлении слотов: {e}")
+        logger.error(f"Тип ошибки: {type(e).__name__}")
+        logger.error(f"Текст слотов: {slots_text}")
+        
+        import traceback
+        logger.error(f"Полный traceback: {traceback.format_exc()}")
+        
         await update.message.reply_text(
-            "😱 Что-то пошло не так при добавлении слотов. Попробуй еще раз!",
+            f"😱 Ошибка при добавлении слотов:\n{str(e)[:200]}\n\nПопробуй еще раз или обратись к администратору!",
             reply_markup=get_master_keyboard()
         )
     
@@ -2018,7 +2025,9 @@ GPT_SERVICE: {gpt_status}
     application.add_handler(CallbackQueryHandler(handle_callback_query))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    logger.info("🐙 Рабочий осьминог запущен и готов к работе!")
+    logger.info("🐙 Рабочий осьминог v2.2.10-FORCE запущен и готов к работе!")
+    logger.info("🔧 Доступны команды: /diag, /debug_env для диагностики")
+    logger.info("🚀 Force deploy активирован - новые команды должны работать!")
     
     async def post_init(application):
         """Инициализация после запуска event loop."""
