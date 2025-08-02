@@ -2170,10 +2170,16 @@ async def show_devices_list(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     devices = data.get("devices", [])
     
     if not devices:
-        await update.message.reply_text(
-            "😔 Пока нет доступных девайсов в заповеднике.",
-            reply_markup=get_client_keyboard()
-        )
+        # Для callback queries используем edit_message_text
+        if update.callback_query:
+            await update.callback_query.edit_message_text(
+                "😔 Пока нет доступных девайсов в заповеднике."
+            )
+        else:
+            await update.message.reply_text(
+                "😔 Пока нет доступных девайсов в заповеднике.",
+                reply_markup=get_client_keyboard()
+            )
         return
     
     message = "🔬 **Девайсы заповедника**\n\n"
@@ -2206,11 +2212,19 @@ async def show_devices_list(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     
     keyboard.append([InlineKeyboardButton("⬅️ Назад", callback_data="back_to_client_menu")])
     
-    await update.message.reply_text(
-        message,
-        reply_markup=InlineKeyboardMarkup(keyboard),
-        parse_mode='Markdown'
-    )
+    # Для callback queries используем edit_message_text
+    if update.callback_query:
+        await update.callback_query.edit_message_text(
+            message,
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode='Markdown'
+        )
+    else:
+        await update.message.reply_text(
+            message,
+            reply_markup=InlineKeyboardMarkup(keyboard),
+            parse_mode='Markdown'
+        )
 
 async def show_device_details(update: Update, context: ContextTypes.DEFAULT_TYPE, device_id: str) -> None:
     """Показывает подробную информацию о девайсе."""
