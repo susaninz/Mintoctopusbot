@@ -8,13 +8,13 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 try:
-    # Импортируем из корневого utils.py
-    import utils as root_utils
+    # Импортируем из корневого formatting_utils.py
+    import formatting_utils
     
     # Реэкспортируем функции
-    format_date_for_user = root_utils.format_date_for_user
-    format_slot_for_user = root_utils.format_slot_for_user
-    format_slots_list = root_utils.format_slots_list
+    format_date_for_user = formatting_utils.format_date_for_user
+    format_slot_for_user = formatting_utils.format_slot_for_user
+    format_slots_list = formatting_utils.format_slots_list
     
 except Exception as e:
     # Fallback на случай ошибки

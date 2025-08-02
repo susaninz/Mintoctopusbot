@@ -1,0 +1,501 @@
+{"timestamp":"2025-08-02T11:00:05.582059037Z","message":"2025-08-02 11:00:05 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"level":"error","message":"2025-08-02 11:00:05 - __main__ - ERROR - Ошибка при добавлении слотов: No module named 'utils.timezone_utils'; 'utils' is not a package","timestamp":"2025-08-02T11:00:05.662712549Z"}
+{"level":"error","timestamp":"2025-08-02T11:01:45.783276992Z","message":"2025-08-02 11:01:39 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:01:39 - __main__ - INFO - User action: user_id=240775778, action=callback_query, context={'callback_data': 'slots_menu'}","timestamp":"2025-08-02T11:01:45.783281938Z","level":"error"}
+{"timestamp":"2025-08-02T11:01:45.783286908Z","level":"error","message":"2025-08-02 11:01:39 - bot_middleware - ERROR - Unexpected error in handle_callback_query: 'NoneType' object has no attribute 'reply_text'"}
+{"timestamp":"2025-08-02T11:01:45.783291629Z","level":"error","message":"Traceback (most recent call last):"}
+{"message":"  File \"/app/bot_middleware.py\", line 52, in wrapper","level":"error","timestamp":"2025-08-02T11:01:45.783296019Z"}
+{"timestamp":"2025-08-02T11:01:45.783300157Z","level":"error","message":"    return await func(update, context, *args, **kwargs)"}
+{"level":"error","message":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^","timestamp":"2025-08-02T11:01:45.783304039Z"}
+{"timestamp":"2025-08-02T11:01:45.783309436Z","level":"error","message":"  File \"/app/working_bot.py\", line 588, in handle_callback_query"}
+{"timestamp":"2025-08-02T11:01:45.783314099Z","level":"error","message":"    await show_free_slots_menu(update, context)"}
+{"message":"  File \"/app/working_bot.py\", line 1944, in show_free_slots_menu","level":"error","timestamp":"2025-08-02T11:01:45.783318557Z"}
+{"level":"error","timestamp":"2025-08-02T11:01:45.783322670Z","message":"    await update.message.reply_text("}
+{"message":"          ^^^^^^^^^^^^^^^^^^^^^^^^^","level":"error","timestamp":"2025-08-02T11:01:45.783326727Z"}
+{"message":"AttributeError: 'NoneType' object has no attribute 'reply_text'","level":"error","timestamp":"2025-08-02T11:01:45.783330604Z"}
+{"message":"2025-08-02 11:01:44 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:01:45.783335186Z","level":"error"}
+{"message":"2025-08-02 11:01:44 - __main__ - INFO - User action: user_id=240775778, action=callback_query, context={'callback_data': 'slots_menu'}","timestamp":"2025-08-02T11:01:45.783339568Z","level":"error"}
+{"timestamp":"2025-08-02T11:01:45.783343347Z","message":"2025-08-02 11:01:44 - bot_middleware - ERROR - Unexpected error in handle_callback_query: 'NoneType' object has no attribute 'reply_text'","level":"error"}
+{"message":"Traceback (most recent call last):","level":"error","timestamp":"2025-08-02T11:01:45.783347238Z"}
+{"timestamp":"2025-08-02T11:01:45.783351298Z","level":"error","message":"  File \"/app/bot_middleware.py\", line 52, in wrapper"}
+{"level":"error","message":"    return await func(update, context, *args, **kwargs)","timestamp":"2025-08-02T11:01:45.783356074Z"}
+{"timestamp":"2025-08-02T11:01:45.783360705Z","message":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^","level":"error"}
+{"timestamp":"2025-08-02T11:01:45.783364710Z","level":"error","message":"  File \"/app/working_bot.py\", line 588, in handle_callback_query"}
+{"message":"    await show_free_slots_menu(update, context)","timestamp":"2025-08-02T11:01:45.783369188Z","level":"error"}
+{"level":"error","message":"  File \"/app/working_bot.py\", line 1944, in show_free_slots_menu","timestamp":"2025-08-02T11:01:45.783373552Z"}
+{"timestamp":"2025-08-02T11:01:45.783377617Z","level":"error","message":"    await update.message.reply_text("}
+{"level":"error","timestamp":"2025-08-02T11:01:45.783390311Z","message":"          ^^^^^^^^^^^^^^^^^^^^^^^^^"}
+{"message":"AttributeError: 'NoneType' object has no attribute 'reply_text'","timestamp":"2025-08-02T11:01:45.783394661Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:02:30 - __main__ - INFO - User action: user_id=240775778, action=message_received, context={'text': 'Свободные слоты 📅'}","timestamp":"2025-08-02T11:02:35.800138227Z"}
+{"level":"error","message":"2025-08-02 11:02:30 - __main__ - INFO - Получено сообщение от 240775778: 'Свободные слоты 📅', состояние: {'role': 'client', 'awaiting': None}","timestamp":"2025-08-02T11:02:35.800146786Z"}
+{"level":"error","message":"2025-08-02 11:02:30 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:02:35.800153064Z"}
+{"level":"error","timestamp":"2025-08-02T11:02:38.239330647Z","message":"2025-08-02 11:02:38 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:02:38 - __main__ - INFO - User action: user_id=240775778, action=callback_query, context={'callback_data': 'slots_date_2025-08-02'}","timestamp":"2025-08-02T11:02:38.257839961Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:03:07 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:03:08.274978605Z"}
+{"timestamp":"2025-08-02T11:03:08.274982887Z","level":"error","message":"2025-08-02 11:03:07 - __main__ - INFO - User action: user_id=240775778, action=callback_query, context={'callback_data': 'slots_menu'}"}
+{"message":"2025-08-02 11:03:07 - bot_middleware - ERROR - Unexpected error in handle_callback_query: 'NoneType' object has no attribute 'reply_text'","level":"error","timestamp":"2025-08-02T11:03:08.274986788Z"}
+{"timestamp":"2025-08-02T11:03:08.274991559Z","level":"error","message":"Traceback (most recent call last):"}
+{"message":"  File \"/app/bot_middleware.py\", line 52, in wrapper","timestamp":"2025-08-02T11:03:08.274996783Z","level":"error"}
+{"message":"    return await func(update, context, *args, **kwargs)","timestamp":"2025-08-02T11:03:08.275001492Z","level":"error"}
+{"timestamp":"2025-08-02T11:03:08.275006399Z","level":"error","message":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"}
+{"timestamp":"2025-08-02T11:03:08.275010046Z","message":"  File \"/app/working_bot.py\", line 588, in handle_callback_query","level":"error"}
+{"message":"    await show_free_slots_menu(update, context)","timestamp":"2025-08-02T11:03:08.275014663Z","level":"error"}
+{"timestamp":"2025-08-02T11:03:08.275019261Z","message":"  File \"/app/working_bot.py\", line 1944, in show_free_slots_menu","level":"error"}
+{"message":"    await update.message.reply_text(","level":"error","timestamp":"2025-08-02T11:03:08.275023337Z"}
+{"timestamp":"2025-08-02T11:03:08.275027435Z","level":"error","message":"          ^^^^^^^^^^^^^^^^^^^^^^^^^"}
+{"message":"AttributeError: 'NoneType' object has no attribute 'reply_text'","timestamp":"2025-08-02T11:03:08.275032243Z","level":"error"}
+{"message":"2025-08-02 11:03:11 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:03:11.092556333Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:03:11 - __main__ - INFO - User action: user_id=240775778, action=callback_query, context={'callback_data': 'slots_menu'}","timestamp":"2025-08-02T11:03:11.124847200Z"}
+{"timestamp":"2025-08-02T11:03:11.124858572Z","message":"2025-08-02 11:03:11 - bot_middleware - ERROR - Unexpected error in handle_callback_query: 'NoneType' object has no attribute 'reply_text'","level":"error"}
+{"message":"Traceback (most recent call last):","timestamp":"2025-08-02T11:03:11.124864066Z","level":"error"}
+{"level":"error","message":"  File \"/app/bot_middleware.py\", line 52, in wrapper","timestamp":"2025-08-02T11:03:11.124871887Z"}
+{"timestamp":"2025-08-02T11:03:11.124878472Z","level":"error","message":"    return await func(update, context, *args, **kwargs)"}
+{"level":"error","timestamp":"2025-08-02T11:03:11.124883637Z","message":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"}
+{"message":"  File \"/app/working_bot.py\", line 588, in handle_callback_query","level":"error","timestamp":"2025-08-02T11:03:11.124888996Z"}
+{"message":"    await show_free_slots_menu(update, context)","level":"error","timestamp":"2025-08-02T11:03:11.124895688Z"}
+{"level":"error","timestamp":"2025-08-02T11:03:11.124901875Z","message":"  File \"/app/working_bot.py\", line 1944, in show_free_slots_menu"}
+{"message":"    await update.message.reply_text(","timestamp":"2025-08-02T11:03:11.124907704Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:03:11.124913310Z","message":"          ^^^^^^^^^^^^^^^^^^^^^^^^^"}
+{"timestamp":"2025-08-02T11:03:11.124918507Z","level":"error","message":"AttributeError: 'NoneType' object has no attribute 'reply_text'"}
+{"timestamp":"2025-08-02T11:03:17.262981130Z","message":"2025-08-02 11:03:17 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"message":"2025-08-02 11:03:17 - __main__ - INFO - User action: user_id=240775778, action=callback_query, context={'callback_data': 'back_to_client_menu'}","timestamp":"2025-08-02T11:03:17.340462692Z","level":"error"}
+{"message":"2025-08-02 11:03:17 - bot_middleware - ERROR - Network error in handle_callback_query: Inline keyboard expected","timestamp":"2025-08-02T11:03:17.344013283Z","level":"error"}
+{"timestamp":"2025-08-02T11:03:18.352868000Z","message":"2025-08-02 11:03:18 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:03:18.422965794Z","message":"2025-08-02 11:03:18 - __main__ - INFO - User action: user_id=240775778, action=callback_query, context={'callback_data': 'back_to_client_menu'}"}
+{"level":"error","message":"2025-08-02 11:03:18 - bot_middleware - ERROR - Network error in handle_callback_query: Inline keyboard expected","timestamp":"2025-08-02T11:03:18.422972278Z"}
+{"message":"2025-08-02 11:03:30 - __main__ - INFO - User action: user_id=240775778, action=message_received, context={'text': 'Свободные слоты 📅'}","timestamp":"2025-08-02T11:03:38.419050949Z","level":"error"}
+{"message":"2025-08-02 11:03:30 - __main__ - INFO - Получено сообщение от 240775778: 'Свободные слоты 📅', состояние: {'role': 'client', 'awaiting': None}","level":"error","timestamp":"2025-08-02T11:03:38.419058021Z"}
+{"message":"2025-08-02 11:03:30 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:03:38.419062207Z","level":"error"}
+{"timestamp":"2025-08-02T11:03:38.419066441Z","level":"error","message":"2025-08-02 11:03:32 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"timestamp":"2025-08-02T11:03:38.419074718Z","level":"error","message":"2025-08-02 11:03:32 - __main__ - INFO - User action: user_id=240775778, action=callback_query, context={'callback_data': 'slots_custom_date'}"}
+{"message":"2025-08-02 11:03:46 - __main__ - INFO - User action: user_id=145482241, action=start_command, context={}","level":"error","timestamp":"2025-08-02T11:03:46.293102445Z"}
+{"level":"error","message":"2025-08-02 11:03:46 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:03:46.293108561Z"}
+{"level":"error","timestamp":"2025-08-02T11:03:51.054278078Z","message":"2025-08-02 11:03:51 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:03:51 - __main__ - INFO - User action: user_id=145482241, action=message_received, context={'text': 'Хочу, чтобы меня помяли 🙏'}","level":"error","timestamp":"2025-08-02T11:03:51.054322811Z"}
+{"message":"2025-08-02 11:03:51 - __main__ - INFO - Получено сообщение от 145482241: 'Хочу, чтобы меня помяли 🙏', состояние: {'role': None, 'awaiting': None}","timestamp":"2025-08-02T11:03:51.057654896Z","level":"error"}
+{"message":"2025-08-02 11:03:51 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:03:51.577398524Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:03:51.577422210Z","message":"2025-08-02 11:03:51 - __main__ - INFO - User action: user_id=240775778, action=message_received, context={'text': '05.08.2025'}"}
+{"timestamp":"2025-08-02T11:03:51.577431938Z","level":"error","message":"2025-08-02 11:03:51 - __main__ - INFO - Получено сообщение от 240775778: '05.08.2025', состояние: {'role': 'client', 'awaiting': None}"}
+{"message":"2025-08-02 11:03:56 - __main__ - INFO - User action: user_id=145482241, action=message_received, context={'text': 'Девайсы заповедника 🔬'}","timestamp":"2025-08-02T11:03:56.052424646Z","level":"error"}
+{"timestamp":"2025-08-02T11:03:56.052439111Z","level":"error","message":"2025-08-02 11:03:56 - __main__ - INFO - Получено сообщение от 145482241: 'Девайсы заповедника 🔬', состояние: {'role': 'client', 'awaiting': None}"}
+{"message":"2025-08-02 11:03:56 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:03:56.052445447Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:04:16.052847611Z","message":"2025-08-02 11:04:07 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:04:07 - __main__ - INFO - User action: user_id=145482241, action=callback_query, context={'callback_data': 'device_info_vibro_chair'}","timestamp":"2025-08-02T11:04:16.052853269Z","level":"error"}
+{"timestamp":"2025-08-02T11:04:19.366649915Z","level":"error","message":"2025-08-02 11:04:19 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:04:19 - __main__ - INFO - User action: user_id=145482241, action=callback_query, context={'callback_data': 'book_device_vibro_chair'}","timestamp":"2025-08-02T11:04:19.456760149Z","level":"error"}
+{"timestamp":"2025-08-02T11:04:22.760968104Z","level":"error","message":"2025-08-02 11:04:22 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"timestamp":"2025-08-02T11:04:22.764807947Z","level":"error","message":"2025-08-02 11:04:22 - __main__ - INFO - User action: user_id=145482241, action=callback_query, context={'callback_data': 'device_slots_vibro_chair_2025-08-02'}"}
+{"timestamp":"2025-08-02T11:04:26.468536371Z","message":"2025-08-02 11:04:26 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"message":"2025-08-02 11:04:26 - __main__ - INFO - User action: user_id=145482241, action=callback_query, context={'callback_data': 'book_device_vibro_chair'}","timestamp":"2025-08-02T11:04:26.480750882Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:04:27 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:04:27.702592983Z"}
+{"message":"2025-08-02 11:04:27 - __main__ - INFO - User action: user_id=145482241, action=callback_query, context={'callback_data': 'device_slots_vibro_chair_2025-08-03'}","timestamp":"2025-08-02T11:04:27.705813816Z","level":"error"}
+{"message":"2025-08-02 11:04:47 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:04:47.704978769Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:04:47.704985815Z","message":"2025-08-02 11:04:47 - __main__ - INFO - User action: user_id=240775778, action=callback_query, context={'callback_data': 'slots_menu'}"}
+{"message":"2025-08-02 11:04:47 - bot_middleware - ERROR - Unexpected error in handle_callback_query: 'NoneType' object has no attribute 'reply_text'","timestamp":"2025-08-02T11:04:47.704991590Z","level":"error"}
+{"level":"error","message":"Traceback (most recent call last):","timestamp":"2025-08-02T11:04:47.704997953Z"}
+{"timestamp":"2025-08-02T11:04:47.705003889Z","level":"error","message":"  File \"/app/bot_middleware.py\", line 52, in wrapper"}
+{"level":"error","timestamp":"2025-08-02T11:04:47.705011346Z","message":"    return await func(update, context, *args, **kwargs)"}
+{"level":"error","message":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^","timestamp":"2025-08-02T11:04:47.705017005Z"}
+{"message":"  File \"/app/working_bot.py\", line 588, in handle_callback_query","timestamp":"2025-08-02T11:04:47.705031928Z","level":"error"}
+{"timestamp":"2025-08-02T11:04:47.705036375Z","level":"error","message":"    await show_free_slots_menu(update, context)"}
+{"timestamp":"2025-08-02T11:04:47.705041004Z","level":"error","message":"  File \"/app/working_bot.py\", line 1944, in show_free_slots_menu"}
+{"timestamp":"2025-08-02T11:04:47.705045887Z","message":"    await update.message.reply_text(","level":"error"}
+{"message":"          ^^^^^^^^^^^^^^^^^^^^^^^^^","level":"error","timestamp":"2025-08-02T11:04:47.705050563Z"}
+{"level":"error","message":"AttributeError: 'NoneType' object has no attribute 'reply_text'","timestamp":"2025-08-02T11:04:47.705054986Z"}
+{"message":"2025-08-02 11:04:47 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T11:04:47.874720970Z"}
+{"level":"error","timestamp":"2025-08-02T11:04:47.874727934Z","message":"2025-08-02 11:04:47 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Добавить слоты ➕'}"}
+{"timestamp":"2025-08-02T11:04:47.874732047Z","message":"2025-08-02 11:04:47 - __main__ - INFO - Получено сообщение от 78273571: 'Добавить слоты ➕', состояние: {'role': 'master', 'awaiting': None}","level":"error"}
+{"message":"2025-08-02 11:04:54 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:04:54.057526645Z","level":"error"}
+{"timestamp":"2025-08-02T11:04:54.057531642Z","message":"2025-08-02 11:04:54 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'завтра в 6 утра в глэмпинге'}","level":"error"}
+{"timestamp":"2025-08-02T11:04:54.057536166Z","message":"2025-08-02 11:04:54 - __main__ - INFO - Получено сообщение от 78273571: 'завтра в 6 утра в глэмпинге', состояние: {'role': 'master', 'awaiting': 'add_slots'}","level":"error"}
+{"message":"2025-08-02 11:04:54 - __main__ - ERROR - Ошибка при добавлении слотов: No module named 'utils.timezone_utils'; 'utils' is not a package","timestamp":"2025-08-02T11:04:54.094670130Z","level":"error"}
+{"message":"2025-08-02 11:06:56 - __main__ - INFO - User action: user_id=78273571, action=start_command, context={}","timestamp":"2025-08-02T11:07:04.276281295Z","level":"error"}
+{"timestamp":"2025-08-02T11:07:04.276297048Z","level":"error","message":"2025-08-02 11:06:56 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:06:57 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Я мну 🐙'}","timestamp":"2025-08-02T11:07:04.276302373Z","level":"error"}
+{"timestamp":"2025-08-02T11:07:04.276307373Z","level":"error","message":"2025-08-02 11:06:57 - __main__ - INFO - Получено сообщение от 78273571: 'Я мну 🐙', состояние: {'role': None, 'awaiting': None}"}
+{"timestamp":"2025-08-02T11:07:04.276312530Z","level":"error","message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Ищем user_id=78273571 (тип: <class 'str'>) среди мастеров..."}
+{"message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Мастер 0: Ваня Слёзкин ID=494449214 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:07:04.276319211Z"}
+{"timestamp":"2025-08-02T11:07:04.276324372Z","message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Мастер 1: Коля Богатищев ID=958532944 (тип: <class 'str'>)","level":"error"}
+{"level":"error","message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Мастер 2: Лёша Алфёров ID=202771061 (тип: <class 'str'>)","timestamp":"2025-08-02T11:07:04.276328825Z"}
+{"level":"error","message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Мастер 3: Кира Белых ID=798305568 (тип: <class 'str'>)","timestamp":"2025-08-02T11:07:04.276332997Z"}
+{"timestamp":"2025-08-02T11:07:04.276338078Z","level":"error","message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Мастер 4: Джамиля Шакирова ID=109133951 (тип: <class 'str'>)"}
+{"timestamp":"2025-08-02T11:07:04.276343230Z","message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Мастер 5: Саша Саломатин ID=144832006 (тип: <class 'str'>)","level":"error"}
+{"message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Мастер 6: Данила Кудряшов ID=355598787 (тип: <class 'str'>)","timestamp":"2025-08-02T11:07:04.276348428Z","level":"error"}
+{"message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Мастер 7: Аня Каширина ID=345109996 (тип: <class 'str'>)","timestamp":"2025-08-02T11:07:04.276352721Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Мастер 8: Ксения Егерева ID=906252844 (тип: <class 'str'>)","timestamp":"2025-08-02T11:07:04.276358107Z"}
+{"level":"error","timestamp":"2025-08-02T11:07:04.276363453Z","message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Мастер 9: Павел ID=192536473 (тип: <class 'str'>)"}
+{"timestamp":"2025-08-02T11:07:04.276367772Z","message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: Мастер 10: Иван ID=78273571 (тип: <class 'str'>)","level":"error"}
+{"message":"2025-08-02 11:06:57 - __main__ - INFO - DEBUG: НАЙДЕН мастер по ID: Иван","timestamp":"2025-08-02T11:07:04.276372687Z","level":"error"}
+{"timestamp":"2025-08-02T11:07:04.276377157Z","level":"error","message":"2025-08-02 11:06:57 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:06:58 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:07:04.276381362Z","level":"error"}
+{"message":"2025-08-02 11:06:58 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Добавить слоты ➕'}","timestamp":"2025-08-02T11:07:04.276385490Z","level":"error"}
+{"message":"2025-08-02 11:06:58 - __main__ - INFO - Получено сообщение от 78273571: 'Добавить слоты ➕', состояние: {'role': 'master', 'awaiting': None}","timestamp":"2025-08-02T11:07:04.276389668Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:07:04.276395423Z","message":"2025-08-02 11:07:04 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"level":"error","message":"2025-08-02 11:07:04 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'завтра в 6 утра в глэмпинге'}","timestamp":"2025-08-02T11:07:04.276399467Z"}
+{"timestamp":"2025-08-02T11:07:04.276403520Z","level":"error","message":"2025-08-02 11:07:04 - __main__ - INFO - Получено сообщение от 78273571: 'завтра в 6 утра в глэмпинге', состояние: {'role': 'master', 'awaiting': 'add_slots'}"}
+{"timestamp":"2025-08-02T11:07:04.329934917Z","level":"error","message":"2025-08-02 11:07:04 - __main__ - ERROR - Ошибка при добавлении слотов: No module named 'utils.timezone_utils'; 'utils' is not a package"}
+{"timestamp":"2025-08-02T11:07:44.366859511Z","message":"2025-08-02 11:07:39 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Сообщить о проблеме 🐛'}","level":"error"}
+{"message":"2025-08-02 11:07:39 - __main__ - INFO - Получено сообщение от 78273571: 'Сообщить о проблеме 🐛', состояние: {'role': 'master', 'awaiting': None}","timestamp":"2025-08-02T11:07:44.366867234Z","level":"error"}
+{"message":"2025-08-02 11:07:39 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:07:44.366871616Z","level":"error"}
+{"message":"2025-08-02 11:07:42 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T11:07:44.366878608Z"}
+{"level":"error","timestamp":"2025-08-02T11:07:44.366883411Z","message":"2025-08-02 11:07:43 - __main__ - INFO - User action: user_id=78273571, action=callback_query, context={'callback_data': 'bug_problem'}"}
+{"timestamp":"2025-08-02T11:07:50.536896003Z","level":"error","message":"2025-08-02 11:07:50 - __main__ - INFO - ✅ Health check запрос обработан"}
+{"timestamp":"2025-08-02T11:07:52.225933503Z","level":"error","message":"2025-08-02 11:07:52 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"level":"error","message":"2025-08-02 11:08:37 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:08:42.254846566Z"}
+{"level":"error","timestamp":"2025-08-02T11:09:02.252714840Z","message":"2025-08-02 11:08:57 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:08:57 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Сообщить о проблеме 🐛'}","timestamp":"2025-08-02T11:09:02.252719003Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:09:02.252724700Z","message":"2025-08-02 11:08:57 - __main__ - INFO - Получено сообщение от 78273571: 'Сообщить о проблеме 🐛', состояние: {'role': 'master', 'awaiting': None}"}
+{"message":"2025-08-02 11:08:57 - services.bug_reporter - INFO - 📝 Сохранен отчет о баге: BR_1754132937","timestamp":"2025-08-02T11:09:02.252729732Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:09:02.252735122Z","message":"2025-08-02 11:08:57 - services.bug_reporter - INFO - 🔄 Начинаю расширенную обработку бага BR_1754132937"}
+{"timestamp":"2025-08-02T11:09:02.252741008Z","level":"error","message":"2025-08-02 11:08:57 - services.gpt_bug_analyzer - INFO - 🔍 Анализирую баг ID: BR_1754132937"}
+{"message":"2025-08-02 11:08:57 - services.gpt_bug_analyzer - ERROR - ❌ Ошибка GPT анализа: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************QxMA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}","timestamp":"2025-08-02T11:09:02.252744918Z","level":"error"}
+{"timestamp":"2025-08-02T11:09:02.252750328Z","message":"2025-08-02 11:08:57 - services.gpt_bug_analyzer - INFO - ✅ Анализ завершен. Тип: other, Серьезность: normal","level":"error"}
+{"level":"error","message":"2025-08-02 11:08:57 - services.bug_reporter - INFO - 🧠 GPT анализ завершен для BR_1754132937","timestamp":"2025-08-02T11:09:02.252754297Z"}
+{"level":"error","message":"2025-08-02 11:08:57 - services.bug_tracker - INFO - 📋 Баг BR_1754132937 зарегистрирован в системе отслеживания","timestamp":"2025-08-02T11:09:02.252759065Z"}
+{"level":"error","timestamp":"2025-08-02T11:09:02.252764589Z","message":"2025-08-02 11:08:57 - services.bug_reporter - INFO - 📋 Баг зарегистрирован в трекере: BR_1754132937"}
+{"timestamp":"2025-08-02T11:09:02.252768895Z","message":"2025-08-02 11:08:57 - services.telegram_notifier - INFO - 📋 Баг BR_1754132937 добавлен в очередь дайджеста","level":"error"}
+{"message":"2025-08-02 11:08:57 - services.bug_reporter - INFO - 📝 Баг BR_1754132937 добавлен в очередь для ручного исправления","timestamp":"2025-08-02T11:09:02.252773099Z","level":"error"}
+{"message":"2025-08-02 11:08:57 - services.bug_reporter - INFO - ✅ Расширенная обработка бага BR_1754132937 завершена","level":"error","timestamp":"2025-08-02T11:09:02.252777493Z"}
+{"message":"2025-08-02 11:09:03 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:09:03.800401069Z","level":"error"}
+{"message":"2025-08-02 11:09:03 - __main__ - INFO - User action: user_id=78273571, action=callback_query, context={'callback_data': 'bug_my_reports'}","level":"error","timestamp":"2025-08-02T11:09:03.819205349Z"}
+{"message":"2025-08-02 11:09:05 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:09:05.982526628Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:09:05.995043853Z","message":"2025-08-02 11:09:05 - __main__ - INFO - User action: user_id=78273571, action=callback_query, context={'callback_data': 'bug_cancel'}"}
+{"message":"2025-08-02 11:09:10 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T11:09:10.109919834Z"}
+{"message":"2025-08-02 11:09:16 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Сменить роль 🔄'}","timestamp":"2025-08-02T11:09:16.323310633Z","level":"error"}
+{"timestamp":"2025-08-02T11:09:16.323319830Z","message":"2025-08-02 11:09:16 - __main__ - INFO - Получено сообщение от 78273571: 'Сменить роль 🔄', состояние: {'role': 'master', 'awaiting': None}","level":"error"}
+{"timestamp":"2025-08-02T11:09:16.323326157Z","message":"2025-08-02 11:09:16 - __main__ - INFO - User action: user_id=78273571, action=start_command, context={}","level":"error"}
+{"message":"2025-08-02 11:09:16 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:09:16.323332272Z","level":"error"}
+{"message":"2025-08-02 11:09:17 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Я мну 🐙'}","timestamp":"2025-08-02T11:09:17.958556297Z","level":"error"}
+{"timestamp":"2025-08-02T11:09:17.958567798Z","message":"2025-08-02 11:09:17 - __main__ - INFO - Получено сообщение от 78273571: 'Я мну 🐙', состояние: {'role': None, 'awaiting': None}","level":"error"}
+{"timestamp":"2025-08-02T11:09:17.958575624Z","message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Ищем user_id=78273571 (тип: <class 'str'>) среди мастеров...","level":"error"}
+{"level":"error","message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Мастер 0: Ваня Слёзкин ID=494449214 (тип: <class 'str'>)","timestamp":"2025-08-02T11:09:17.958581794Z"}
+{"message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Мастер 1: Коля Богатищев ID=958532944 (тип: <class 'str'>)","timestamp":"2025-08-02T11:09:17.958589740Z","level":"error"}
+{"message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Мастер 2: Лёша Алфёров ID=202771061 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:09:17.958596406Z"}
+{"timestamp":"2025-08-02T11:09:17.958603094Z","level":"error","message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Мастер 3: Кира Белых ID=798305568 (тип: <class 'str'>)"}
+{"timestamp":"2025-08-02T11:09:17.958609371Z","level":"error","message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Мастер 4: Джамиля Шакирова ID=109133951 (тип: <class 'str'>)"}
+{"message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Мастер 5: Саша Саломатин ID=144832006 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:09:17.958616539Z"}
+{"timestamp":"2025-08-02T11:09:17.958624320Z","message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Мастер 6: Данила Кудряшов ID=355598787 (тип: <class 'str'>)","level":"error"}
+{"timestamp":"2025-08-02T11:09:17.958630677Z","message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Мастер 7: Аня Каширина ID=345109996 (тип: <class 'str'>)","level":"error"}
+{"message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Мастер 8: Ксения Егерева ID=906252844 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:09:17.958636956Z"}
+{"level":"error","message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Мастер 9: Павел ID=192536473 (тип: <class 'str'>)","timestamp":"2025-08-02T11:09:17.958643358Z"}
+{"level":"error","timestamp":"2025-08-02T11:09:17.958649216Z","message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: Мастер 10: Иван ID=78273571 (тип: <class 'str'>)"}
+{"timestamp":"2025-08-02T11:09:17.958655674Z","level":"error","message":"2025-08-02 11:09:17 - __main__ - INFO - DEBUG: НАЙДЕН мастер по ID: Иван"}
+{"timestamp":"2025-08-02T11:09:17.958661807Z","message":"2025-08-02 11:09:17 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"level":"error","message":"2025-08-02 11:09:19 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:09:19.674696357Z"}
+{"timestamp":"2025-08-02T11:09:19.674703834Z","message":"2025-08-02 11:09:19 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Добавить слоты ➕'}","level":"error"}
+{"timestamp":"2025-08-02T11:09:19.674708965Z","level":"error","message":"2025-08-02 11:09:19 - __main__ - INFO - Получено сообщение от 78273571: 'Добавить слоты ➕', состояние: {'role': 'master', 'awaiting': None}"}
+{"level":"error","message":"2025-08-02 11:09:24 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'завтра в 6 утра в глэмпинге'}","timestamp":"2025-08-02T11:09:24.352969524Z"}
+{"message":"2025-08-02 11:09:24 - __main__ - INFO - Получено сообщение от 78273571: 'завтра в 6 утра в глэмпинге', состояние: {'role': 'master', 'awaiting': 'add_slots'}","level":"error","timestamp":"2025-08-02T11:09:24.352978223Z"}
+{"timestamp":"2025-08-02T11:09:24.352983610Z","level":"error","message":"2025-08-02 11:09:24 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:09:24 - __main__ - ERROR - Ошибка при добавлении слотов: No module named 'utils.timezone_utils'; 'utils' is not a package","level":"error","timestamp":"2025-08-02T11:09:24.391444722Z"}
+{"message":"2025-08-02 11:09:30 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Сообщить о проблеме 🐛'}","timestamp":"2025-08-02T11:09:30.197339924Z","level":"error"}
+{"timestamp":"2025-08-02T11:09:30.197346766Z","level":"error","message":"2025-08-02 11:09:30 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"timestamp":"2025-08-02T11:09:30.197353966Z","level":"error","message":"2025-08-02 11:09:30 - __main__ - INFO - Получено сообщение от 78273571: 'Сообщить о проблеме 🐛', состояние: {'role': 'master', 'awaiting': None}"}
+{"level":"error","message":"2025-08-02 11:09:31 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:09:31.757972191Z"}
+{"message":"2025-08-02 11:09:31 - __main__ - INFO - User action: user_id=78273571, action=callback_query, context={'callback_data': 'bug_problem'}","level":"error","timestamp":"2025-08-02T11:09:31.766955988Z"}
+{"timestamp":"2025-08-02T11:09:40.828871077Z","message":"2025-08-02 11:09:40 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"level":"error","message":"2025-08-02 11:13:52 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Добавить слоты ➕'}","timestamp":"2025-08-02T11:14:01.083241861Z"}
+{"timestamp":"2025-08-02T11:14:01.083246552Z","message":"2025-08-02 11:13:52 - __main__ - INFO - Получено сообщение от 78273571: 'Добавить слоты ➕', состояние: {'role': 'master', 'awaiting': None}","level":"error"}
+{"timestamp":"2025-08-02T11:14:01.083251120Z","level":"error","message":"2025-08-02 11:13:52 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:13:52 - services.bug_reporter - INFO - 📝 Сохранен отчет о баге: BR_1754133232","timestamp":"2025-08-02T11:14:01.083256874Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:14:01.083260410Z","message":"2025-08-02 11:13:52 - services.bug_reporter - INFO - 🔄 Начинаю расширенную обработку бага BR_1754133232"}
+{"timestamp":"2025-08-02T11:14:01.083264563Z","message":"2025-08-02 11:13:52 - services.gpt_bug_analyzer - INFO - 🔍 Анализирую баг ID: BR_1754133232","level":"error"}
+{"timestamp":"2025-08-02T11:14:01.083268234Z","level":"error","message":"2025-08-02 11:13:52 - services.gpt_bug_analyzer - ERROR - ❌ Ошибка GPT анализа: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************QxMA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}"}
+{"level":"error","message":"2025-08-02 11:13:52 - services.gpt_bug_analyzer - INFO - ✅ Анализ завершен. Тип: other, Серьезность: high","timestamp":"2025-08-02T11:14:01.083272351Z"}
+{"timestamp":"2025-08-02T11:14:01.083276415Z","message":"2025-08-02 11:13:52 - services.bug_reporter - INFO - 🧠 GPT анализ завершен для BR_1754133232","level":"error"}
+{"message":"2025-08-02 11:13:52 - services.bug_tracker - INFO - 📋 Баг BR_1754133232 зарегистрирован в системе отслеживания","timestamp":"2025-08-02T11:14:01.083281394Z","level":"error"}
+{"timestamp":"2025-08-02T11:14:01.083335795Z","message":"2025-08-02 11:13:52 - services.bug_reporter - INFO - 📋 Баг зарегистрирован в трекере: BR_1754133232","level":"error"}
+{"message":"2025-08-02 11:13:52 - services.telegram_notifier - INFO - 📋 Баг BR_1754133232 добавлен в очередь дайджеста","timestamp":"2025-08-02T11:14:01.083340669Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:14:01.083344867Z","message":"2025-08-02 11:13:52 - services.bug_reporter - INFO - 📝 Баг BR_1754133232 добавлен в очередь для ручного исправления"}
+{"level":"error","message":"2025-08-02 11:13:52 - services.bug_reporter - INFO - ✅ Расширенная обработка бага BR_1754133232 завершена","timestamp":"2025-08-02T11:14:01.083349973Z"}
+{"timestamp":"2025-08-02T11:14:01.083357032Z","level":"error","message":"2025-08-02 11:13:55 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"timestamp":"2025-08-02T11:14:01.083363340Z","level":"error","message":"2025-08-02 11:13:55 - __main__ - INFO - User action: user_id=78273571, action=callback_query, context={'callback_data': 'bug_my_reports'}"}
+{"timestamp":"2025-08-02T11:14:01.083369269Z","message":"2025-08-02 11:13:56 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"message":"2025-08-02 11:13:56 - __main__ - INFO - User action: user_id=78273571, action=callback_query, context={'callback_data': 'bug_cancel'}","level":"error","timestamp":"2025-08-02T11:14:01.083374504Z"}
+{"message":"2025-08-02 11:13:58 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Сообщить о проблеме 🐛'}","level":"error","timestamp":"2025-08-02T11:14:01.083385496Z"}
+{"message":"2025-08-02 11:13:58 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T11:14:01.083391499Z"}
+{"timestamp":"2025-08-02T11:14:01.083398280Z","message":"2025-08-02 11:13:58 - __main__ - INFO - Получено сообщение от 78273571: 'Сообщить о проблеме 🐛', состояние: {'role': 'master', 'awaiting': None}","level":"error"}
+{"timestamp":"2025-08-02T11:14:01.083404021Z","level":"error","message":"2025-08-02 11:13:59 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:14:00 - __main__ - INFO - User action: user_id=78273571, action=callback_query, context={'callback_data': 'bug_problem'}","timestamp":"2025-08-02T11:14:01.083469750Z","level":"error"}
+{"message":"2025-08-02 11:14:18 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T11:14:21.094532973Z"}
+{"message":"2025-08-02 11:14:51 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T11:15:01.104255896Z"}
+{"level":"error","timestamp":"2025-08-02T11:24:01.498479616Z","message":"2025-08-02 11:23:55 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Сменить роль 🔄'}"}
+{"message":"2025-08-02 11:23:55 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:24:01.498488161Z","level":"error"}
+{"message":"2025-08-02 11:23:55 - __main__ - INFO - Получено сообщение от 78273571: 'Сменить роль 🔄', состояние: {'role': 'master', 'awaiting': None}","timestamp":"2025-08-02T11:24:01.498494944Z","level":"error"}
+{"message":"2025-08-02 11:23:55 - __main__ - INFO - User action: user_id=78273571, action=start_command, context={}","timestamp":"2025-08-02T11:24:01.498501692Z","level":"error"}
+{"message":"2025-08-02 11:23:57 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Я мну 🐙'}","timestamp":"2025-08-02T11:24:01.498507007Z","level":"error"}
+{"message":"2025-08-02 11:23:57 - __main__ - INFO - Получено сообщение от 78273571: 'Я мну 🐙', состояние: {'role': None, 'awaiting': None}","level":"error","timestamp":"2025-08-02T11:24:01.498513427Z"}
+{"message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Ищем user_id=78273571 (тип: <class 'str'>) среди мастеров...","level":"error","timestamp":"2025-08-02T11:24:01.498520127Z"}
+{"level":"error","timestamp":"2025-08-02T11:24:01.498526971Z","message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Мастер 0: Ваня Слёзкин ID=494449214 (тип: <class 'str'>)"}
+{"message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Мастер 1: Коля Богатищев ID=958532944 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:01.498533149Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:23:57 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:24:01.498538501Z"}
+{"message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Мастер 2: Лёша Алфёров ID=202771061 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:01.498545726Z","level":"error"}
+{"message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Мастер 3: Кира Белых ID=798305568 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:01.498550890Z","level":"error"}
+{"timestamp":"2025-08-02T11:24:01.498555939Z","level":"error","message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Мастер 4: Джамиля Шакирова ID=109133951 (тип: <class 'str'>)"}
+{"level":"error","message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Мастер 5: Саша Саломатин ID=144832006 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:01.498679649Z"}
+{"timestamp":"2025-08-02T11:24:01.498684237Z","message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Мастер 6: Данила Кудряшов ID=355598787 (тип: <class 'str'>)","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:24:01.498688419Z","message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Мастер 7: Аня Каширина ID=345109996 (тип: <class 'str'>)"}
+{"message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Мастер 8: Ксения Егерева ID=906252844 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:01.498692751Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:24:01.498697974Z","message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Мастер 9: Павел ID=192536473 (тип: <class 'str'>)"}
+{"message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: Мастер 10: Иван ID=78273571 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:01.498702401Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:24:01.498706480Z","message":"2025-08-02 11:23:57 - __main__ - INFO - DEBUG: НАЙДЕН мастер по ID: Иван"}
+{"level":"error","timestamp":"2025-08-02T11:24:01.498710467Z","message":"2025-08-02 11:23:59 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Сообщить о проблеме 🐛'}"}
+{"timestamp":"2025-08-02T11:24:01.498714370Z","message":"2025-08-02 11:23:59 - __main__ - INFO - Получено сообщение от 78273571: 'Сообщить о проблеме 🐛', состояние: {'role': 'master', 'awaiting': None}","level":"error"}
+{"timestamp":"2025-08-02T11:24:01.498718156Z","level":"error","message":"2025-08-02 11:23:59 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"level":"error","message":"2025-08-02 11:24:00 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:24:01.498721772Z"}
+{"message":"2025-08-02 11:24:00 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Добавить слоты ➕'}","timestamp":"2025-08-02T11:24:01.498725699Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:24:00 - __main__ - INFO - Получено сообщение от 78273571: 'Добавить слоты ➕', состояние: {'role': 'master', 'awaiting': None}","timestamp":"2025-08-02T11:24:01.498729810Z"}
+{"timestamp":"2025-08-02T11:24:07.652309387Z","level":"error","message":"2025-08-02 11:24:07 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'завтра в 6 утра в глэмпинге хиппи'}"}
+{"timestamp":"2025-08-02T11:24:07.652338407Z","level":"error","message":"2025-08-02 11:24:07 - __main__ - INFO - Получено сообщение от 78273571: 'завтра в 6 утра в глэмпинге хиппи', состояние: {'role': 'master', 'awaiting': 'add_slots'}"}
+{"message":"2025-08-02 11:24:07 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T11:24:07.652347094Z"}
+{"level":"error","timestamp":"2025-08-02T11:24:07.796929133Z","message":"2025-08-02 11:24:07 - __main__ - ERROR - Ошибка при добавлении слотов: No module named 'utils.timezone_utils'; 'utils' is not a package"}
+{"level":"error","message":"2025-08-02 11:24:09 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Сообщить о проблеме 🐛'}","timestamp":"2025-08-02T11:24:09.979525846Z"}
+{"message":"2025-08-02 11:24:09 - __main__ - INFO - Получено сообщение от 78273571: 'Сообщить о проблеме 🐛', состояние: {'role': 'master', 'awaiting': None}","timestamp":"2025-08-02T11:24:09.979532834Z","level":"error"}
+{"timestamp":"2025-08-02T11:24:09.979539479Z","level":"error","message":"2025-08-02 11:24:09 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:24:14 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T11:24:14.845651400Z"}
+{"level":"error","timestamp":"2025-08-02T11:24:14.858260667Z","message":"2025-08-02 11:24:14 - __main__ - INFO - User action: user_id=78273571, action=callback_query, context={'callback_data': 'bug_problem'}"}
+{"timestamp":"2025-08-02T11:24:34.845395681Z","message":"2025-08-02 11:24:25 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"message":"2025-08-02 11:24:31 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:24:34.845403775Z","level":"error"}
+{"message":"2025-08-02 11:24:31 - __main__ - INFO - User action: user_id=78273571, action=start_command, context={}","level":"error","timestamp":"2025-08-02T11:24:34.845409196Z"}
+{"timestamp":"2025-08-02T11:24:34.845414399Z","level":"error","message":"2025-08-02 11:24:33 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"timestamp":"2025-08-02T11:24:34.845419520Z","message":"2025-08-02 11:24:33 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Я мну 🐙'}","level":"error"}
+{"message":"2025-08-02 11:24:33 - __main__ - INFO - Получено сообщение от 78273571: 'Я мну 🐙', состояние: {'role': None, 'awaiting': None}","timestamp":"2025-08-02T11:24:34.845425447Z","level":"error"}
+{"message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Ищем user_id=78273571 (тип: <class 'str'>) среди мастеров...","level":"error","timestamp":"2025-08-02T11:24:34.845431035Z"}
+{"message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Мастер 0: Ваня Слёзкин ID=494449214 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:24:34.845438857Z"}
+{"timestamp":"2025-08-02T11:24:34.845443782Z","level":"error","message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Мастер 1: Коля Богатищев ID=958532944 (тип: <class 'str'>)"}
+{"message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Мастер 2: Лёша Алфёров ID=202771061 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:34.845449332Z","level":"error"}
+{"timestamp":"2025-08-02T11:24:34.845455854Z","level":"error","message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Мастер 3: Кира Белых ID=798305568 (тип: <class 'str'>)"}
+{"message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Мастер 4: Джамиля Шакирова ID=109133951 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:34.845460648Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:24:34.845465176Z","message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Мастер 5: Саша Саломатин ID=144832006 (тип: <class 'str'>)"}
+{"level":"error","message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Мастер 6: Данила Кудряшов ID=355598787 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:34.845810580Z"}
+{"timestamp":"2025-08-02T11:24:34.845816832Z","message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Мастер 7: Аня Каширина ID=345109996 (тип: <class 'str'>)","level":"error"}
+{"message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Мастер 8: Ксения Егерева ID=906252844 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:34.845822045Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Мастер 9: Павел ID=192536473 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:34.845826997Z"}
+{"message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: Мастер 10: Иван ID=78273571 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:24:34.845832337Z"}
+{"message":"2025-08-02 11:24:33 - __main__ - INFO - DEBUG: НАЙДЕН мастер по ID: Иван","timestamp":"2025-08-02T11:24:34.845837224Z","level":"error"}
+{"message":"2025-08-02 11:24:33 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Добавить слоты ➕'}","timestamp":"2025-08-02T11:24:34.845842718Z","level":"error"}
+{"timestamp":"2025-08-02T11:24:34.845848344Z","level":"error","message":"2025-08-02 11:24:33 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"level":"error","timestamp":"2025-08-02T11:24:34.845854159Z","message":"2025-08-02 11:24:33 - __main__ - INFO - Получено сообщение от 78273571: 'Добавить слоты ➕', состояние: {'role': 'master', 'awaiting': None}"}
+{"message":"2025-08-02 11:24:33 - services.bug_reporter - INFO - 📝 Сохранен отчет о баге: BR_1754133873","level":"error","timestamp":"2025-08-02T11:24:34.845859964Z"}
+{"message":"2025-08-02 11:24:33 - services.bug_reporter - INFO - 🔄 Начинаю расширенную обработку бага BR_1754133873","timestamp":"2025-08-02T11:24:34.845865150Z","level":"error"}
+{"timestamp":"2025-08-02T11:24:34.845869953Z","level":"error","message":"2025-08-02 11:24:33 - services.gpt_bug_analyzer - INFO - 🔍 Анализирую баг ID: BR_1754133873"}
+{"timestamp":"2025-08-02T11:24:34.845875138Z","message":"2025-08-02 11:24:34 - services.gpt_bug_analyzer - ERROR - ❌ Ошибка GPT анализа: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************QxMA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:24:34.845880549Z","message":"2025-08-02 11:24:34 - services.gpt_bug_analyzer - INFO - ✅ Анализ завершен. Тип: other, Серьезность: high"}
+{"timestamp":"2025-08-02T11:24:34.845885470Z","message":"2025-08-02 11:24:34 - services.bug_reporter - INFO - 🧠 GPT анализ завершен для BR_1754133873","level":"error"}
+{"level":"error","message":"2025-08-02 11:24:34 - services.bug_tracker - INFO - 📋 Баг BR_1754133873 зарегистрирован в системе отслеживания","timestamp":"2025-08-02T11:24:34.845892300Z"}
+{"level":"error","message":"2025-08-02 11:24:34 - services.bug_reporter - INFO - 📋 Баг зарегистрирован в трекере: BR_1754133873","timestamp":"2025-08-02T11:24:34.845897116Z"}
+{"timestamp":"2025-08-02T11:24:34.845903124Z","message":"2025-08-02 11:24:34 - services.telegram_notifier - INFO - 📋 Баг BR_1754133873 добавлен в очередь дайджеста","level":"error"}
+{"timestamp":"2025-08-02T11:24:34.845907658Z","level":"error","message":"2025-08-02 11:24:34 - services.bug_reporter - INFO - 📝 Баг BR_1754133873 добавлен в очередь для ручного исправления"}
+{"message":"2025-08-02 11:24:34 - services.bug_reporter - INFO - ✅ Расширенная обработка бага BR_1754133873 завершена","timestamp":"2025-08-02T11:24:34.845912245Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:24:38 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:24:38.021316619Z"}
+{"message":"2025-08-02 11:24:38 - __main__ - INFO - User action: user_id=78273571, action=callback_query, context={'callback_data': 'bug_my_reports'}","timestamp":"2025-08-02T11:24:38.159349215Z","level":"error"}
+{"message":"2025-08-02 11:24:39 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:24:39.084625748Z","level":"error"}
+{"timestamp":"2025-08-02T11:24:39.169573288Z","level":"error","message":"2025-08-02 11:24:39 - __main__ - INFO - User action: user_id=78273571, action=callback_query, context={'callback_data': 'bug_cancel'}"}
+{"level":"error","timestamp":"2025-08-02T11:24:41.332769580Z","message":"2025-08-02 11:24:41 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Сменить роль 🔄'}"}
+{"message":"2025-08-02 11:24:41 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T11:24:41.332786407Z"}
+{"timestamp":"2025-08-02T11:24:41.332792176Z","message":"2025-08-02 11:24:41 - __main__ - INFO - Получено сообщение от 78273571: 'Сменить роль 🔄', состояние: {'role': 'master', 'awaiting': None}","level":"error"}
+{"timestamp":"2025-08-02T11:24:41.332798307Z","level":"error","message":"2025-08-02 11:24:41 - __main__ - INFO - User action: user_id=78273571, action=start_command, context={}"}
+{"message":"2025-08-02 11:24:42 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Я мну 🐙'}","timestamp":"2025-08-02T11:24:42.264703023Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:24:42.264708080Z","message":"2025-08-02 11:24:42 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"timestamp":"2025-08-02T11:24:42.264712107Z","level":"error","message":"2025-08-02 11:24:42 - __main__ - INFO - Получено сообщение от 78273571: 'Я мну 🐙', состояние: {'role': None, 'awaiting': None}"}
+{"timestamp":"2025-08-02T11:24:42.264716277Z","level":"error","message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Ищем user_id=78273571 (тип: <class 'str'>) среди мастеров..."}
+{"level":"error","timestamp":"2025-08-02T11:24:42.264720675Z","message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Мастер 0: Ваня Слёзкин ID=494449214 (тип: <class 'str'>)"}
+{"message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Мастер 1: Коля Богатищев ID=958532944 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:24:42.264725246Z"}
+{"timestamp":"2025-08-02T11:24:42.264729638Z","level":"error","message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Мастер 2: Лёша Алфёров ID=202771061 (тип: <class 'str'>)"}
+{"level":"error","timestamp":"2025-08-02T11:24:42.264733681Z","message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Мастер 3: Кира Белых ID=798305568 (тип: <class 'str'>)"}
+{"timestamp":"2025-08-02T11:24:42.264739212Z","message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Мастер 4: Джамиля Шакирова ID=109133951 (тип: <class 'str'>)","level":"error"}
+{"level":"error","message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Мастер 5: Саша Саломатин ID=144832006 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:42.264743069Z"}
+{"message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Мастер 6: Данила Кудряшов ID=355598787 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:24:42.264747602Z"}
+{"level":"error","message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Мастер 7: Аня Каширина ID=345109996 (тип: <class 'str'>)","timestamp":"2025-08-02T11:24:42.264752239Z"}
+{"timestamp":"2025-08-02T11:24:42.264756200Z","level":"error","message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Мастер 8: Ксения Егерева ID=906252844 (тип: <class 'str'>)"}
+{"message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Мастер 9: Павел ID=192536473 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:24:42.264808003Z"}
+{"message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: Мастер 10: Иван ID=78273571 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:24:42.264813173Z"}
+{"timestamp":"2025-08-02T11:24:42.264817623Z","message":"2025-08-02 11:24:42 - __main__ - INFO - DEBUG: НАЙДЕН мастер по ID: Иван","level":"error"}
+{"message":"2025-08-02 11:24:43 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Добавить слоты ➕'}","timestamp":"2025-08-02T11:24:43.272739176Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:24:43.272748621Z","message":"2025-08-02 11:24:43 - __main__ - INFO - Получено сообщение от 78273571: 'Добавить слоты ➕', состояние: {'role': 'master', 'awaiting': None}"}
+{"message":"2025-08-02 11:24:43 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:24:43.272756495Z","level":"error"}
+{"timestamp":"2025-08-02T11:24:49.292673414Z","level":"error","message":"2025-08-02 11:24:49 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'завтра в 6 утра в глэмпинге'}"}
+{"message":"2025-08-02 11:24:49 - __main__ - INFO - Получено сообщение от 78273571: 'завтра в 6 утра в глэмпинге', состояние: {'role': 'master', 'awaiting': 'add_slots'}","timestamp":"2025-08-02T11:24:49.292683758Z","level":"error"}
+{"message":"2025-08-02 11:24:49 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:24:49.292691170Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:24:49 - __main__ - ERROR - Ошибка при добавлении слотов: No module named 'utils.timezone_utils'; 'utils' is not a package","timestamp":"2025-08-02T11:24:49.362244316Z"}
+{"timestamp":"2025-08-02T11:25:09.358353217Z","level":"error","message":"2025-08-02 11:25:03 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:27:46 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:27:49.440662254Z","level":"error"}
+{"message":"2025-08-02 11:27:52 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:27:52.790950023Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:27:52.790955612Z","message":"2025-08-02 11:27:52 - __main__ - INFO - User action: user_id=78273571, action=start_command, context={}"}
+{"message":"2025-08-02 11:27:54 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:27:54.249316444Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:30:33 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:30:34.462313818Z"}
+{"message":"2025-08-02 11:30:33 - __main__ - INFO - User action: user_id=39750030, action=callback_query, context={'callback_data': 'book_device_vibro_chair'}","timestamp":"2025-08-02T11:30:34.462320940Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:30:36 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:30:36.319702882Z"}
+{"message":"2025-08-02 11:30:36 - __main__ - INFO - User action: user_id=39750030, action=callback_query, context={'callback_data': 'device_slots_vibro_chair_2025-08-03'}","timestamp":"2025-08-02T11:30:36.332343191Z","level":"error"}
+{"timestamp":"2025-08-02T11:31:26.399536356Z","level":"error","message":"2025-08-02 11:31:22 - __main__ - INFO - User action: user_id=78273571, action=start_command, context={}"}
+{"timestamp":"2025-08-02T11:31:26.399542773Z","message":"2025-08-02 11:31:22 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"timestamp":"2025-08-02T11:31:26.399549861Z","level":"error","message":"2025-08-02 11:31:23 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:31:26 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:31:26.520482365Z","level":"error"}
+{"message":"2025-08-02 11:31:26 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Я мну 🐙'}","timestamp":"2025-08-02T11:31:26.520489501Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:31:26.520494559Z","message":"2025-08-02 11:31:26 - __main__ - INFO - Получено сообщение от 78273571: 'Я мну 🐙', состояние: {'role': None, 'awaiting': None}"}
+{"timestamp":"2025-08-02T11:31:26.520501605Z","level":"error","message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Ищем user_id=78273571 (тип: <class 'str'>) среди мастеров..."}
+{"level":"error","message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Мастер 0: Ваня Слёзкин ID=494449214 (тип: <class 'str'>)","timestamp":"2025-08-02T11:31:26.520505390Z"}
+{"message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Мастер 1: Коля Богатищев ID=958532944 (тип: <class 'str'>)","timestamp":"2025-08-02T11:31:26.520509777Z","level":"error"}
+{"message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Мастер 2: Лёша Алфёров ID=202771061 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:31:26.520514223Z"}
+{"timestamp":"2025-08-02T11:31:26.520518247Z","message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Мастер 3: Кира Белых ID=798305568 (тип: <class 'str'>)","level":"error"}
+{"level":"error","message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Мастер 4: Джамиля Шакирова ID=109133951 (тип: <class 'str'>)","timestamp":"2025-08-02T11:31:26.520522681Z"}
+{"timestamp":"2025-08-02T11:31:26.520527604Z","message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Мастер 5: Саша Саломатин ID=144832006 (тип: <class 'str'>)","level":"error"}
+{"timestamp":"2025-08-02T11:31:26.520531531Z","level":"error","message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Мастер 6: Данила Кудряшов ID=355598787 (тип: <class 'str'>)"}
+{"level":"error","message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Мастер 7: Аня Каширина ID=345109996 (тип: <class 'str'>)","timestamp":"2025-08-02T11:31:26.520535694Z"}
+{"level":"error","timestamp":"2025-08-02T11:31:26.520539827Z","message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Мастер 8: Ксения Егерева ID=906252844 (тип: <class 'str'>)"}
+{"message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Мастер 9: Павел ID=192536473 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:31:26.520545734Z"}
+{"timestamp":"2025-08-02T11:31:26.520550434Z","level":"error","message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: Мастер 10: Иван ID=78273571 (тип: <class 'str'>)"}
+{"level":"error","timestamp":"2025-08-02T11:31:26.520554749Z","message":"2025-08-02 11:31:26 - __main__ - INFO - DEBUG: НАЙДЕН мастер по ID: Иван"}
+{"message":"2025-08-02 11:31:28 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:31:28.747212458Z","level":"error"}
+{"message":"2025-08-02 11:31:33 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:31:33.883384209Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:32:28 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:32:33.903468550Z"}
+{"timestamp":"2025-08-02T11:32:33.903473961Z","message":"2025-08-02 11:32:28 - __main__ - INFO - User action: user_id=39750030, action=callback_query, context={'callback_data': 'confirm_device_booking_vibro_chair_2025-08-03_11:00'}","level":"error"}
+{"timestamp":"2025-08-02T11:32:33.903478757Z","level":"error","message":"2025-08-02 11:32:28 - services.backup_manager - INFO - ✅ Создана резервная копия: data/backups/database_backup_20250802_113228_before_update.json"}
+{"message":"2025-08-02 11:32:28 - services.backup_manager - INFO - 📊 Статистика бэкапа (before_update):","level":"error","timestamp":"2025-08-02T11:32:33.903483037Z"}
+{"level":"error","message":"2025-08-02 11:32:28 - services.backup_manager - INFO -    - Мастеров: 12","timestamp":"2025-08-02T11:32:33.903486955Z"}
+{"message":"2025-08-02 11:32:28 - services.backup_manager - INFO -    - Записей на мастеров: 0","level":"error","timestamp":"2025-08-02T11:32:33.903492726Z"}
+{"level":"error","timestamp":"2025-08-02T11:32:33.903496968Z","message":"2025-08-02 11:32:28 - services.backup_manager - INFO -    - Записей на устройства: 9"}
+{"message":"2025-08-02 11:32:28 - services.backup_manager - INFO -    - Устройств: 3","level":"error","timestamp":"2025-08-02T11:32:33.903501074Z"}
+{"message":"2025-08-02 11:32:28 - services.safe_data_manager - INFO - 📦 Создан бэкап перед сохранением: data/backups/database_backup_20250802_113228_before_update.json","timestamp":"2025-08-02T11:32:33.903504934Z","level":"error"}
+{"timestamp":"2025-08-02T11:32:33.903509768Z","message":"2025-08-02 11:32:28 - services.safe_data_manager - INFO - ✅ Данные сохранены успешно (причина: update)","level":"error"}
+{"message":"2025-08-02 11:32:28 - __main__ - ERROR - Ошибка планирования напоминания 1_hour: 'master_name'","timestamp":"2025-08-02T11:32:33.903514131Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:32:33.903518405Z","message":"2025-08-02 11:32:28 - __main__ - ERROR - Ошибка планирования напоминания 15_min: 'master_name'"}
+{"level":"error","message":"2025-08-02 11:32:28 - __main__ - INFO - Напоминания запланированы для бронирования df540dcc","timestamp":"2025-08-02T11:32:33.903526232Z"}
+{"timestamp":"2025-08-02T11:34:54.204977197Z","level":"error","message":"2025-08-02 11:34:49 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"level":"error","message":"2025-08-02 11:35:48 - __main__ - INFO - ✅ Health check запрос обработан","timestamp":"2025-08-02T11:35:54.239263820Z"}
+{"level":"error","message":"2025-08-02 11:36:55 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:37:04.233286727Z"}
+{"level":"error","message":"2025-08-02 11:36:55 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'ага'}","timestamp":"2025-08-02T11:37:04.233294559Z"}
+{"message":"2025-08-02 11:36:55 - __main__ - INFO - Получено сообщение от 78273571: 'ага', состояние: {'role': 'master', 'awaiting': None}","timestamp":"2025-08-02T11:37:04.233301040Z","level":"error"}
+{"timestamp":"2025-08-02T11:37:04.233307176Z","message":"2025-08-02 11:36:59 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"level":"error","message":"2025-08-02 11:37:02 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:37:04.233313126Z"}
+{"message":"2025-08-02 11:45:06 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:45:14.704621727Z","level":"error"}
+{"message":"2025-08-02 11:45:09 - __main__ - INFO - User action: user_id=78273571, action=start_command, context={}","timestamp":"2025-08-02T11:45:14.704632986Z","level":"error"}
+{"timestamp":"2025-08-02T11:45:14.704640407Z","level":"error","message":"2025-08-02 11:45:09 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 11:45:10 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Я мну 🐙'}","timestamp":"2025-08-02T11:45:14.704647075Z","level":"error"}
+{"message":"2025-08-02 11:45:10 - __main__ - INFO - Получено сообщение от 78273571: 'Я мну 🐙', состояние: {'role': None, 'awaiting': None}","timestamp":"2025-08-02T11:45:14.704653417Z","level":"error"}
+{"level":"error","message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Ищем user_id=78273571 (тип: <class 'str'>) среди мастеров...","timestamp":"2025-08-02T11:45:14.704666066Z"}
+{"message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Мастер 0: Ваня Слёзкин ID=494449214 (тип: <class 'str'>)","timestamp":"2025-08-02T11:45:14.704672438Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:45:14.704678442Z","message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Мастер 1: Коля Богатищев ID=958532944 (тип: <class 'str'>)"}
+{"timestamp":"2025-08-02T11:45:14.704684490Z","level":"error","message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Мастер 2: Лёша Алфёров ID=202771061 (тип: <class 'str'>)"}
+{"level":"error","timestamp":"2025-08-02T11:45:14.704690848Z","message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Мастер 3: Кира Белых ID=798305568 (тип: <class 'str'>)"}
+{"timestamp":"2025-08-02T11:45:14.704697441Z","level":"error","message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Мастер 4: Джамиля Шакирова ID=109133951 (тип: <class 'str'>)"}
+{"message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Мастер 5: Саша Саломатин ID=144832006 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:45:14.704704380Z"}
+{"level":"error","message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Мастер 6: Данила Кудряшов ID=355598787 (тип: <class 'str'>)","timestamp":"2025-08-02T11:45:14.704711354Z"}
+{"message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Мастер 7: Аня Каширина ID=345109996 (тип: <class 'str'>)","level":"error","timestamp":"2025-08-02T11:45:14.704774297Z"}
+{"timestamp":"2025-08-02T11:45:14.704781426Z","message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Мастер 8: Ксения Егерева ID=906252844 (тип: <class 'str'>)","level":"error"}
+{"level":"error","message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Мастер 9: Павел ID=192536473 (тип: <class 'str'>)","timestamp":"2025-08-02T11:45:14.704788996Z"}
+{"timestamp":"2025-08-02T11:45:14.704796164Z","level":"error","message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: Мастер 10: Иван ID=78273571 (тип: <class 'str'>)"}
+{"timestamp":"2025-08-02T11:45:14.704853040Z","message":"2025-08-02 11:45:10 - __main__ - INFO - DEBUG: НАЙДЕН мастер по ID: Иван","level":"error"}
+{"level":"error","timestamp":"2025-08-02T11:45:14.704860602Z","message":"2025-08-02 11:45:10 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"level":"error","message":"2025-08-02 11:45:12 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:45:14.704866819Z"}
+{"level":"error","message":"2025-08-02 11:45:15 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:45:15.258470517Z"}
+{"timestamp":"2025-08-02T11:45:18.198403048Z","level":"error","message":"2025-08-02 11:45:18 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Мои слоты 📋'}"}
+{"message":"2025-08-02 11:45:18 - __main__ - INFO - Получено сообщение от 78273571: 'Мои слоты 📋', состояние: {'role': 'master', 'awaiting': None}","level":"error","timestamp":"2025-08-02T11:45:18.198525673Z"}
+{"level":"error","message":"2025-08-02 11:45:18 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:45:18.202319704Z"}
+{"level":"error","timestamp":"2025-08-02T11:45:19.403084228Z","message":"2025-08-02 11:45:19 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'Добавить слоты ➕'}"}
+{"timestamp":"2025-08-02T11:45:19.403089697Z","level":"error","message":"2025-08-02 11:45:19 - __main__ - INFO - Получено сообщение от 78273571: 'Добавить слоты ➕', состояние: {'role': 'master', 'awaiting': None}"}
+{"level":"error","timestamp":"2025-08-02T11:45:19.403096239Z","message":"2025-08-02 11:45:19 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"level":"error","message":"2025-08-02 11:45:24 - __main__ - INFO - User action: user_id=78273571, action=message_received, context={'text': 'в глэмпинге в 6 утра завтра'}","timestamp":"2025-08-02T11:45:24.660290409Z"}
+{"message":"2025-08-02 11:45:24 - __main__ - INFO - Получено сообщение от 78273571: 'в глэмпинге в 6 утра завтра', состояние: {'role': 'master', 'awaiting': 'add_slots'}","timestamp":"2025-08-02T11:45:24.660300527Z","level":"error"}
+{"message":"2025-08-02 11:45:24 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T11:45:24.660307694Z","level":"error"}
+{"timestamp":"2025-08-02T11:45:24.737211584Z","level":"error","message":"2025-08-02 11:45:24 - __main__ - ERROR - Ошибка при добавлении слотов: No module named 'utils.timezone_utils'; 'utils' is not a package"}
+{"message":"2025-08-02 11:45:56 - __main__ - INFO - ✅ Health check запрос обработан","level":"error","timestamp":"2025-08-02T11:46:04.769065717Z"}
+{"timestamp":"2025-08-02T11:56:45.586456425Z","message":"2025-08-02 11:56:39 - __main__ - INFO - ✅ Health check запрос обработан","level":"error"}
+{"message":"2025-08-02 12:01:55 - __main__ - INFO - ✅ Health check запрос обработан","timestamp":"2025-08-02T12:01:55.913387402Z","level":"error"}
+{"level":"error","message":"2025-08-02 12:32:23 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T12:32:27.319525796Z"}
+{"message":"2025-08-02 12:32:23 - __main__ - INFO - User action: user_id=61335783, action=start_command, context={}","timestamp":"2025-08-02T12:32:27.319532948Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T12:32:30.293203662Z","message":"2025-08-02 12:32:30 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"level":"error","message":"2025-08-02 12:32:30 - __main__ - INFO - User action: user_id=61335783, action=message_received, context={'text': 'Хочу, чтобы меня помяли 🙏'}","timestamp":"2025-08-02T12:32:30.293210750Z"}
+{"message":"2025-08-02 12:32:30 - __main__ - INFO - Получено сообщение от 61335783: 'Хочу, чтобы меня помяли 🙏', состояние: {'role': None, 'awaiting': None}","timestamp":"2025-08-02T12:32:30.293219995Z","level":"error"}
+{"timestamp":"2025-08-02T12:32:50.307249348Z","level":"error","message":"2025-08-02 12:32:41 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"timestamp":"2025-08-02T12:32:50.307259130Z","message":"2025-08-02 12:32:41 - __main__ - INFO - User action: user_id=61335783, action=message_received, context={'text': 'Свободные слоты 📅'}","level":"error"}
+{"level":"error","timestamp":"2025-08-02T12:32:50.307266157Z","message":"2025-08-02 12:32:41 - __main__ - INFO - Получено сообщение от 61335783: 'Свободные слоты 📅', состояние: {'role': 'client', 'awaiting': None}"}
+{"message":"2025-08-02 12:32:47 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T12:32:50.307277111Z"}
+{"timestamp":"2025-08-02T12:32:50.307283513Z","level":"error","message":"2025-08-02 12:32:47 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'slots_date_2025-08-03'}"}
+{"timestamp":"2025-08-02T12:32:55.060468560Z","message":"2025-08-02 12:32:55 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"message":"2025-08-02 12:32:55 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'back_to_client_menu'}","level":"error","timestamp":"2025-08-02T12:32:55.152195097Z"}
+{"message":"2025-08-02 12:32:55 - bot_middleware - ERROR - Network error in handle_callback_query: Inline keyboard expected","timestamp":"2025-08-02T12:32:55.152205941Z","level":"error"}
+{"timestamp":"2025-08-02T12:32:56.845540673Z","level":"error","message":"2025-08-02 12:32:56 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 12:32:56 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'back_to_client_menu'}","level":"error","timestamp":"2025-08-02T12:32:56.966869916Z"}
+{"timestamp":"2025-08-02T12:32:56.966874720Z","message":"2025-08-02 12:32:56 - bot_middleware - ERROR - Network error in handle_callback_query: Inline keyboard expected","level":"error"}
+{"timestamp":"2025-08-02T12:32:58.092310876Z","message":"2025-08-02 12:32:58 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"level":"error","message":"2025-08-02 12:32:58 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'back_to_client_menu'}","timestamp":"2025-08-02T12:32:58.169458892Z"}
+{"message":"2025-08-02 12:32:58 - bot_middleware - ERROR - Network error in handle_callback_query: Inline keyboard expected","level":"error","timestamp":"2025-08-02T12:32:58.173132742Z"}
+{"level":"error","timestamp":"2025-08-02T12:33:01.221434969Z","message":"2025-08-02 12:33:01 - __main__ - INFO - User action: user_id=61335783, action=message_received, context={'text': 'Свободные слоты 📅'}"}
+{"message":"2025-08-02 12:33:01 - __main__ - INFO - Получено сообщение от 61335783: 'Свободные слоты 📅', состояние: {'role': 'client', 'awaiting': None}","timestamp":"2025-08-02T12:33:01.221443335Z","level":"error"}
+{"level":"error","timestamp":"2025-08-02T12:33:01.221448574Z","message":"2025-08-02 12:33:01 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"level":"error","message":"2025-08-02 12:33:03 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T12:33:03.464314061Z"}
+{"message":"2025-08-02 12:33:03 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'slots_date_2025-08-04'}","timestamp":"2025-08-02T12:33:03.464318197Z","level":"error"}
+{"message":"2025-08-02 12:33:10 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T12:33:10.308004660Z","level":"error"}
+{"message":"2025-08-02 12:33:10 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'back_to_client_menu'}","timestamp":"2025-08-02T12:33:10.413013619Z","level":"error"}
+{"level":"error","message":"2025-08-02 12:33:10 - bot_middleware - ERROR - Network error in handle_callback_query: Inline keyboard expected","timestamp":"2025-08-02T12:33:10.416704332Z"}
+{"message":"2025-08-02 12:33:14 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T12:33:14.538133708Z","level":"error"}
+{"timestamp":"2025-08-02T12:33:14.642551846Z","level":"error","message":"2025-08-02 12:33:14 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'slots_menu'}"}
+{"message":"2025-08-02 12:33:14 - bot_middleware - ERROR - Unexpected error in handle_callback_query: 'NoneType' object has no attribute 'reply_text'","level":"error","timestamp":"2025-08-02T12:33:14.642557190Z"}
+{"level":"error","message":"Traceback (most recent call last):","timestamp":"2025-08-02T12:33:14.642561301Z"}
+{"message":"  File \"/app/bot_middleware.py\", line 52, in wrapper","timestamp":"2025-08-02T12:33:14.642565227Z","level":"error"}
+{"timestamp":"2025-08-02T12:33:14.642569319Z","message":"    return await func(update, context, *args, **kwargs)","level":"error"}
+{"timestamp":"2025-08-02T12:33:14.642573636Z","level":"error","message":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"}
+{"timestamp":"2025-08-02T12:33:14.642579468Z","level":"error","message":"  File \"/app/working_bot.py\", line 588, in handle_callback_query"}
+{"message":"    await show_free_slots_menu(update, context)","timestamp":"2025-08-02T12:33:14.642584540Z","level":"error"}
+{"timestamp":"2025-08-02T12:33:14.642588735Z","message":"  File \"/app/working_bot.py\", line 1944, in show_free_slots_menu","level":"error"}
+{"timestamp":"2025-08-02T12:33:14.642593111Z","level":"error","message":"    await update.message.reply_text("}
+{"message":"          ^^^^^^^^^^^^^^^^^^^^^^^^^","timestamp":"2025-08-02T12:33:14.642597034Z","level":"error"}
+{"timestamp":"2025-08-02T12:33:14.642601881Z","message":"AttributeError: 'NoneType' object has no attribute 'reply_text'","level":"error"}
+{"level":"error","message":"2025-08-02 12:33:16 - __main__ - INFO - User action: user_id=61335783, action=message_received, context={'text': 'Свободные слоты 📅'}","timestamp":"2025-08-02T12:33:16.994326836Z"}
+{"message":"2025-08-02 12:33:16 - __main__ - INFO - Получено сообщение от 61335783: 'Свободные слоты 📅', состояние: {'role': 'client', 'awaiting': None}","level":"error","timestamp":"2025-08-02T12:33:16.994331539Z"}
+{"message":"2025-08-02 12:33:16 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T12:33:16.997631019Z"}
+{"level":"error","message":"2025-08-02 12:33:23 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T12:33:23.638620852Z"}
+{"message":"2025-08-02 12:33:23 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'slots_custom_date'}","timestamp":"2025-08-02T12:33:23.695732047Z","level":"error"}
+{"message":"2025-08-02 12:33:42 - __main__ - INFO - User action: user_id=61335783, action=message_received, context={'text': '5.01.2025'}","timestamp":"2025-08-02T12:33:43.695132299Z","level":"error"}
+{"level":"error","message":"2025-08-02 12:33:42 - __main__ - INFO - Получено сообщение от 61335783: '5.01.2025', состояние: {'role': 'client', 'awaiting': None}","timestamp":"2025-08-02T12:33:43.695140629Z"}
+{"timestamp":"2025-08-02T12:33:43.695147110Z","level":"error","message":"2025-08-02 12:33:42 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 12:33:54 - __main__ - INFO - User action: user_id=61335783, action=message_received, context={'text': '05.01.2025'}","timestamp":"2025-08-02T12:34:03.691959214Z","level":"error"}
+{"message":"2025-08-02 12:33:54 - __main__ - INFO - Получено сообщение от 61335783: '05.01.2025', состояние: {'role': 'client', 'awaiting': None}","timestamp":"2025-08-02T12:34:03.691965184Z","level":"error"}
+{"message":"2025-08-02 12:33:54 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error","timestamp":"2025-08-02T12:34:03.691969793Z"}
+{"timestamp":"2025-08-02T12:34:03.691973849Z","message":"2025-08-02 12:33:58 - __main__ - INFO - User action: user_id=61335783, action=message_received, context={'text': 'Свободные слоты 📅'}","level":"error"}
+{"level":"error","timestamp":"2025-08-02T12:34:03.691977962Z","message":"2025-08-02 12:33:58 - __main__ - INFO - Получено сообщение от 61335783: 'Свободные слоты 📅', состояние: {'role': 'client', 'awaiting': None}"}
+{"level":"error","message":"2025-08-02 12:33:58 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T12:34:03.691982110Z"}
+{"message":"2025-08-02 12:34:01 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T12:34:03.691986818Z","level":"error"}
+{"level":"error","message":"2025-08-02 12:34:01 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'slots_custom_date'}","timestamp":"2025-08-02T12:34:03.691991309Z"}
+{"level":"error","timestamp":"2025-08-02T12:34:12.753325280Z","message":"2025-08-02 12:34:12 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"timestamp":"2025-08-02T12:34:12.753334041Z","level":"error","message":"2025-08-02 12:34:12 - __main__ - INFO - User action: user_id=61335783, action=message_received, context={'text': '05.01.2025'}"}
+{"message":"2025-08-02 12:34:12 - __main__ - INFO - Получено сообщение от 61335783: '05.01.2025', состояние: {'role': 'client', 'awaiting': None}","timestamp":"2025-08-02T12:34:12.753339255Z","level":"error"}
+{"level":"error","message":"2025-08-02 12:34:14 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T12:34:14.192759098Z"}
+{"message":"2025-08-02 12:34:14 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'slots_menu'}","level":"error","timestamp":"2025-08-02T12:34:14.213644052Z"}
+{"message":"2025-08-02 12:34:14 - bot_middleware - ERROR - Unexpected error in handle_callback_query: 'NoneType' object has no attribute 'reply_text'","timestamp":"2025-08-02T12:34:14.213654493Z","level":"error"}
+{"message":"Traceback (most recent call last):","level":"error","timestamp":"2025-08-02T12:34:14.213662852Z"}
+{"message":"  File \"/app/bot_middleware.py\", line 52, in wrapper","timestamp":"2025-08-02T12:34:14.213671797Z","level":"error"}
+{"timestamp":"2025-08-02T12:34:14.213679119Z","level":"error","message":"    return await func(update, context, *args, **kwargs)"}
+{"message":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^","timestamp":"2025-08-02T12:34:14.213684711Z","level":"error"}
+{"timestamp":"2025-08-02T12:34:14.213690451Z","level":"error","message":"  File \"/app/working_bot.py\", line 588, in handle_callback_query"}
+{"timestamp":"2025-08-02T12:34:14.213698000Z","level":"error","message":"    await show_free_slots_menu(update, context)"}
+{"timestamp":"2025-08-02T12:34:14.213705363Z","message":"  File \"/app/working_bot.py\", line 1944, in show_free_slots_menu","level":"error"}
+{"timestamp":"2025-08-02T12:34:14.213711512Z","level":"error","message":"    await update.message.reply_text("}
+{"timestamp":"2025-08-02T12:34:14.213717161Z","level":"error","message":"          ^^^^^^^^^^^^^^^^^^^^^^^^^"}
+{"message":"AttributeError: 'NoneType' object has no attribute 'reply_text'","level":"error","timestamp":"2025-08-02T12:34:14.213723179Z"}
+{"timestamp":"2025-08-02T12:34:14.949802227Z","message":"2025-08-02 12:34:14 - __main__ - INFO - ✅ Webhook запрос обработан","level":"error"}
+{"timestamp":"2025-08-02T12:34:15.022429480Z","level":"error","message":"2025-08-02 12:34:15 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'slots_menu'}"}
+{"message":"2025-08-02 12:34:15 - bot_middleware - ERROR - Unexpected error in handle_callback_query: 'NoneType' object has no attribute 'reply_text'","level":"error","timestamp":"2025-08-02T12:34:15.022440851Z"}
+{"message":"Traceback (most recent call last):","timestamp":"2025-08-02T12:34:15.022448006Z","level":"error"}
+{"message":"  File \"/app/bot_middleware.py\", line 52, in wrapper","level":"error","timestamp":"2025-08-02T12:34:15.022455271Z"}
+{"level":"error","timestamp":"2025-08-02T12:34:15.022462312Z","message":"    return await func(update, context, *args, **kwargs)"}
+{"timestamp":"2025-08-02T12:34:15.022469030Z","message":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^","level":"error"}
+{"level":"error","message":"  File \"/app/working_bot.py\", line 588, in handle_callback_query","timestamp":"2025-08-02T12:34:15.022475448Z"}
+{"timestamp":"2025-08-02T12:34:15.022481489Z","message":"    await show_free_slots_menu(update, context)","level":"error"}
+{"timestamp":"2025-08-02T12:34:15.022487324Z","level":"error","message":"  File \"/app/working_bot.py\", line 1944, in show_free_slots_menu"}
+{"level":"error","message":"    await update.message.reply_text(","timestamp":"2025-08-02T12:34:15.022494116Z"}
+{"level":"error","message":"          ^^^^^^^^^^^^^^^^^^^^^^^^^","timestamp":"2025-08-02T12:34:15.022500443Z"}
+{"level":"error","timestamp":"2025-08-02T12:34:15.022506613Z","message":"AttributeError: 'NoneType' object has no attribute 'reply_text'"}
+{"message":"2025-08-02 12:34:21 - __main__ - INFO - User action: user_id=61335783, action=message_received, context={'text': 'Сообщить о проблеме 🐛'}","timestamp":"2025-08-02T12:34:21.892720924Z","level":"error"}
+{"timestamp":"2025-08-02T12:34:21.892729451Z","level":"error","message":"2025-08-02 12:34:21 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 12:34:21 - __main__ - INFO - Получено сообщение от 61335783: 'Сообщить о проблеме 🐛', состояние: {'role': 'client', 'awaiting': None}","timestamp":"2025-08-02T12:34:21.892734925Z","level":"error"}
+{"message":"2025-08-02 12:34:32 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T12:34:41.894942541Z","level":"error"}
+{"message":"2025-08-02 12:34:33 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'bug_problem'}","level":"error","timestamp":"2025-08-02T12:34:41.894947788Z"}
+{"level":"error","timestamp":"2025-08-02T12:34:41.894953159Z","message":"2025-08-02 12:34:37 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 12:34:37 - __main__ - INFO - User action: user_id=162376894, action=start_command, context={}","timestamp":"2025-08-02T12:34:41.894958502Z","level":"error"}
+{"level":"error","message":"2025-08-02 12:34:41 - __main__ - INFO - User action: user_id=61335783, action=message_received, context={'text': 'Мастера 👥'}","timestamp":"2025-08-02T12:34:41.894963733Z"}
+{"message":"2025-08-02 12:34:41 - __main__ - INFO - Получено сообщение от 61335783: 'Мастера 👥', состояние: {'role': 'client', 'awaiting': None}","level":"error","timestamp":"2025-08-02T12:34:41.894968849Z"}
+{"timestamp":"2025-08-02T12:34:41.894974410Z","level":"error","message":"2025-08-02 12:34:41 - __main__ - INFO - ✅ Webhook запрос обработан"}
+{"message":"2025-08-02 12:34:46 - __main__ - INFO - ✅ Webhook запрос обработан","timestamp":"2025-08-02T12:34:46.304408574Z","level":"error"}
+{"message":"2025-08-02 12:34:46 - __main__ - INFO - User action: user_id=61335783, action=callback_query, context={'callback_data': 'select_master_958532944'}","level":"error","timestamp":"2025-08-02T12:34:46.353392426Z"}
