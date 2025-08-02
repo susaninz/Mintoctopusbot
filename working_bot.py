@@ -2190,7 +2190,9 @@ async def show_device_details(update: Update, context: ContextTypes.DEFAULT_TYPE
             break
     
     if not device:
-        await update.callback_query.edit_message_text("❌ Устройство не найдено.")
+        # Детальное логирование для отладки
+        logger.error(f"Device not found in show_device_details - device_id: '{device_id}', available devices: {[d.get('id') for d in devices]}")
+        await update.callback_query.edit_message_text("❌ Устройство не найдено. Попробуй обновить список.")
         return
     
     icon = device.get("icon", "🔧")
@@ -2273,7 +2275,8 @@ async def show_device_booking_slots(update: Update, context: ContextTypes.DEFAUL
             break
     
     if not device:
-        await update.callback_query.edit_message_text("❌ Устройство не найдено.")
+        logger.error(f"Device not found - device_id: '{device_id}', function: show_device_booking_slots")
+        await update.callback_query.edit_message_text("❌ Устройство не найдено. Попробуй обновить список.")
         return
     
     icon = device.get("icon", "🔧")
@@ -2350,7 +2353,8 @@ async def show_device_day_slots(update: Update, context: ContextTypes.DEFAULT_TY
             break
     
     if not device:
-        await update.callback_query.edit_message_text("❌ Устройство не найдено.")
+        logger.error(f"Device not found - device_id: '{device_id}', function: show_device_booking_slots")
+        await update.callback_query.edit_message_text("❌ Устройство не найдено. Попробуй обновить список.")
         return
     
     icon = device.get("icon", "🔧")
@@ -2427,7 +2431,8 @@ async def process_device_booking(update: Update, context: ContextTypes.DEFAULT_T
             break
     
     if not device:
-        await query.edit_message_text("❌ Устройство не найдено.")
+        logger.error(f"Device not found - device_id: '{device_id}', function: process_device_booking")
+        await query.edit_message_text("❌ Устройство не найдено. Попробуй обновить список.")
         return
     
     # Находим конкретный слот

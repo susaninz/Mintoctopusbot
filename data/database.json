@@ -8,22 +8,7 @@
       "services": [
         "массаж"
       ],
-      "time_slots": [
-        {
-          "date": "2025-08-01",
-          "start_time": "11:00",
-          "end_time": "12:00",
-          "location": "Глэмпинг №5 Хиппи",
-          "is_booked": false
-        },
-        {
-          "date": "2025-08-01",
-          "start_time": "12:30",
-          "end_time": "13:30",
-          "location": "Спасалка",
-          "is_booked": false
-        }
-      ],
+      "time_slots": [],
       "is_active": true,
       "created_at": "2025-08-01T17:10:51.511768",
       "bookings": [],
@@ -39,20 +24,6 @@
         "массаж"
       ],
       "time_slots": [
-        {
-          "date": "2025-08-01",
-          "start_time": "12:00",
-          "end_time": "13:00",
-          "location": "Баня",
-          "is_booked": false
-        },
-        {
-          "date": "2025-08-01",
-          "start_time": "13:15",
-          "end_time": "14:15",
-          "location": "Баня",
-          "is_booked": false
-        },
         {
           "date": "2025-08-02",
           "start_time": "12:00",
@@ -121,7 +92,7 @@
       "created_at": "2025-08-01T17:10:51.511789",
       "bookings": [
         {
-          "id": "76615687-ba49-4f8c-9446-4a586878fc26",
+          "id": "d9cda663-e8eb-4c49-8c16-1cfa31667ded",
           "client_id": "unknown",
           "client_name": "@sasha_makes",
           "client_username": "@sasha_makes",
@@ -132,11 +103,11 @@
           "slot_end_time": "13:00",
           "location": "Баня",
           "status": "confirmed",
-          "created_at": "2025-08-01T20:25:47.207103",
+          "created_at": "2025-08-02T00:09:51.844393",
           "migrated_from_csv": true
         },
         {
-          "id": "11351c69-7387-4fb2-a2ca-93cb96ab6e95",
+          "id": "5a86acd7-19a8-4a16-821e-94d9744db3b9",
           "client_id": "unknown",
           "client_name": "@biserov",
           "client_username": "@biserov",
@@ -147,11 +118,11 @@
           "slot_end_time": "14:15",
           "location": "Баня",
           "status": "confirmed",
-          "created_at": "2025-08-01T20:25:47.207107",
+          "created_at": "2025-08-02T00:09:51.844397",
           "migrated_from_csv": true
         },
         {
-          "id": "3ee5c343-a11b-4a78-9e86-6a3dc3bab740",
+          "id": "51b9aa18-e758-48d5-9b81-e8e12484b40d",
           "client_id": "unknown",
           "client_name": "@pavelazhg",
           "client_username": "@pavelazhg",
@@ -162,11 +133,11 @@
           "slot_end_time": "16:15",
           "location": "Баня",
           "status": "confirmed",
-          "created_at": "2025-08-01T20:25:47.207111",
+          "created_at": "2025-08-02T00:09:51.844400",
           "migrated_from_csv": true
         },
         {
-          "id": "5fd950b2-c9cb-4e45-92e6-4be96e4183e2",
+          "id": "9d5a1550-013e-459b-a732-df972e977be0",
           "client_id": "unknown",
           "client_name": "@ShakirovaD",
           "client_username": "@ShakirovaD",
@@ -177,11 +148,11 @@
           "slot_end_time": "17:15",
           "location": "Баня",
           "status": "confirmed",
-          "created_at": "2025-08-01T20:25:47.207115",
+          "created_at": "2025-08-02T00:09:51.844404",
           "migrated_from_csv": true
         },
         {
-          "id": "0c00e5e2-6424-4618-8f33-f8def2fa1bc1",
+          "id": "a603b037-f6d7-4401-bb4c-f3189bdaf1d1",
           "client_id": "unknown",
           "client_name": "@ValMikhno",
           "client_username": "@ValMikhno",
@@ -192,7 +163,7 @@
           "slot_end_time": "13:00",
           "location": "Баня",
           "status": "confirmed",
-          "created_at": "2025-08-01T20:25:47.207119",
+          "created_at": "2025-08-02T00:09:51.844407",
           "migrated_from_csv": true
         }
       ],
@@ -209,27 +180,6 @@
       ],
       "time_slots": [
         {
-          "date": "2025-08-01",
-          "start_time": "15:00",
-          "end_time": "16:00",
-          "location": "Баня",
-          "is_booked": false
-        },
-        {
-          "date": "2025-08-01",
-          "start_time": "16:00",
-          "end_time": "17:00",
-          "location": "Баня",
-          "is_booked": false
-        },
-        {
-          "date": "2025-08-01",
-          "start_time": "12:00",
-          "end_time": "13:00",
-          "location": "Баня",
-          "is_booked": false
-        },
-        {
           "date": "2025-08-02",
           "start_time": "12:00",
           "end_time": "13:00",
@@ -241,7 +191,7 @@
       "created_at": "2025-08-01T17:10:51.511797",
       "bookings": [
         {
-          "id": "a49c621b-dde2-46fc-a631-a28372688659",
+          "id": "22530daa-dea2-4eab-b97a-f9b0621e25ca",
           "client_id": "unknown",
           "client_name": "@Olimpiada_f",
           "client_username": "@Olimpiada_f",
@@ -252,7 +202,7 @@
           "slot_end_time": "13:00",
           "location": "Баня",
           "status": "confirmed",
-          "created_at": "2025-08-01T20:25:47.207099",
+          "created_at": "2025-08-02T00:09:51.844388",
           "migrated_from_csv": true
         }
       ],
@@ -284,13 +234,6 @@
       ],
       "time_slots": [
         {
-          "date": "2025-08-01",
-          "start_time": "17:00",
-          "end_time": "18:00",
-          "location": "Спасалка",
-          "is_booked": false
-        },
-        {
           "date": "2025-08-02",
           "start_time": "15:00",
           "end_time": "16:00",
@@ -309,7 +252,7 @@
       "created_at": "2025-08-01T17:10:51.511813",
       "bookings": [
         {
-          "id": "cd0a6a42-17bf-4d35-919b-80803626c179",
+          "id": "6a65e947-7156-460a-abf3-dae16781b532",
           "client_id": "unknown",
           "client_name": "@a_n_n_a_p_a_k",
           "client_username": "@a_n_n_a_p_a_k",
@@ -320,11 +263,11 @@
           "slot_end_time": "16:00",
           "location": "Баня",
           "status": "confirmed",
-          "created_at": "2025-08-01T20:25:47.207055",
+          "created_at": "2025-08-02T00:09:51.844372",
           "migrated_from_csv": true
         },
         {
-          "id": "dd6727f1-13c3-427d-9058-2fbb4ef42137",
+          "id": "e4585fac-9468-401f-87f4-07784261ad65",
           "client_id": "unknown",
           "client_name": "@natali_luch",
           "client_username": "@natali_luch",
@@ -335,7 +278,7 @@
           "slot_end_time": "12:00",
           "location": "Баня",
           "status": "confirmed",
-          "created_at": "2025-08-01T20:25:47.207060",
+          "created_at": "2025-08-02T00:09:51.844383",
           "migrated_from_csv": true
         }
       ],
@@ -409,22 +352,7 @@
       "services": [
         "массаж"
       ],
-      "time_slots": [
-        {
-          "date": "2025-08-01",
-          "start_time": "15:00",
-          "end_time": "16:00",
-          "location": "Спасалка",
-          "is_booked": false
-        },
-        {
-          "date": "2025-08-01",
-          "start_time": "10:00",
-          "end_time": "11:00",
-          "location": "Спасалка",
-          "is_booked": false
-        }
-      ],
+      "time_slots": [],
       "is_active": true,
       "created_at": "2025-08-01T17:10:51.511831",
       "bookings": [],

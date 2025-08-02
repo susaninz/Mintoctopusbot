@@ -1,0 +1,8 @@
+{
+  "timestamp": "2025-08-02T00:25:16.920017",
+  "total_notifications": 8,
+  "sent_successfully": 0,
+  "failed_to_send": 1,
+  "telegram_id_not_found": 7,
+  "sent_to_users": []
+}
