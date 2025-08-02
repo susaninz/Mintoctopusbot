@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 from bot.constants import (
     MASTER_ROLE, CLIENT_ROLE, MY_SLOTS, ADD_SLOTS, MY_PROFILE, EDIT_PROFILE,
     VIEW_MASTERS, VIEW_DEVICES, VIEW_FREE_SLOTS, MY_BOOKINGS, 
-    BACK_TO_MENU, CHANGE_ROLE, REPORT_BUG
+    BACK_TO_MENU, CHANGE_ROLE, REPORT_BUG, MY_VIBRO_CHAIR
 )
 
 # Хранилище состояний пользователей
@@ -84,6 +84,15 @@ def get_client_keyboard():
         [VIEW_MASTERS, VIEW_DEVICES],
         [VIEW_FREE_SLOTS, MY_BOOKINGS],
         [CHANGE_ROLE, REPORT_BUG]
+    ], resize_keyboard=True)
+
+def get_device_owner_keyboard():
+    """Клавиатура для владельца девайса (Фила)."""
+    return ReplyKeyboardMarkup([
+        [MY_VIBRO_CHAIR, VIEW_DEVICES],
+        [VIEW_MASTERS, VIEW_FREE_SLOTS],
+        [MY_BOOKINGS, CHANGE_ROLE],
+        [REPORT_BUG]
     ], resize_keyboard=True)
 
 def generate_reminder_text(is_master: bool, master_name: str, client_name: str, slot_time: str, slot_location: str) -> str:
@@ -693,6 +702,30 @@ async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TY
                 ]),
                 parse_mode='Markdown'
             )
+    
+    # Обработка отмены записей на виброкресло
+    elif callback_data.startswith("cancel_vibro_"):
+        booking_id = callback_data.replace("cancel_vibro_", "")
+        await handle_vibro_booking_cancel(update, context, booking_id)
+        return
+    
+    # Обработка возврата в меню владельца девайса
+    elif callback_data == "back_to_device_menu":
+        user_id = str(query.from_user.id)
+        user_state = user_states.get(user_id, {})
+        
+        if user_state.get("is_device_owner"):
+            await query.edit_message_text(
+                "🪑 **Меню владельца виброкресла**\n\n"
+                "Выбери действие:",
+                reply_markup=get_device_owner_keyboard()
+            )
+        else:
+            await query.edit_message_text(
+                "🌊 Главное меню гостя:",
+                reply_markup=get_client_keyboard()
+            )
+        return
 
 async def handle_booking_response(update: Update, context: ContextTypes.DEFAULT_TYPE, callback_data: str) -> None:
     """Обрабатывает подтверждение или отклонение записи мастером."""
@@ -1048,12 +1081,25 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         return
     
     elif text == CLIENT_ROLE:
-        await update.message.reply_text(
-            "Чудесно! Добро пожаловать в заповедник исцеления! 🌿\n\n"
-            "Выбери, что хочешь сделать:",
-            reply_markup=get_client_keyboard()
-        )
         user_state["role"] = "client"
+        
+        # Проверяем, является ли пользователь владельцем девайса
+        user_handle = f"@{update.effective_user.username}" if update.effective_user.username else None
+        is_device_owner = user_handle == "@fshubin"  # Пока только Фил
+        
+        if is_device_owner:
+            user_state["is_device_owner"] = True
+            await update.message.reply_text(
+                "🪑 Привет, Фил! Добро пожаловать в заповедник!\n\n"
+                "Ты можешь управлять своим виброкреслом и смотреть обычные функции гостя:",
+                reply_markup=get_device_owner_keyboard()
+            )
+        else:
+            await update.message.reply_text(
+                "Чудесно! Добро пожаловать в заповедник исцеления! 🌿\n\n"
+                "Выбери, что хочешь сделать:",
+                reply_markup=get_client_keyboard()
+            )
         return
     
     # Обрабатываем профиль мастера
@@ -1074,6 +1120,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     # Обрабатываем новый профиль мастера
     if user_state.get("awaiting") == "new_profile":
         await process_new_profile(update, context)
+        return
+    
+    # Обрабатываем причину отмены записи на виброкресло
+    if user_state.get("awaiting") == "vibro_cancel_reason":
+        await process_vibro_cancel_reason(update, context)
         return
     
     # Обрабатываем описание бага (но сначала проверяем что это не системная кнопка)
@@ -1350,6 +1401,9 @@ async def handle_master_buttons(update: Update, context: ContextTypes.DEFAULT_TY
     elif text == REPORT_BUG:
         await bug_reporter.handle_bug_report_start(update, context)
     
+    elif text == MY_VIBRO_CHAIR:
+        await show_vibro_chair_bookings(update, context)
+    
     else:
         await update.message.reply_text("Используй кнопки меню для навигации.")
 
@@ -1377,6 +1431,9 @@ async def handle_client_buttons(update: Update, context: ContextTypes.DEFAULT_TY
     
     elif text == REPORT_BUG:
         await bug_reporter.handle_bug_report_start(update, context)
+    
+    elif text == MY_VIBRO_CHAIR:
+        await show_vibro_chair_bookings(update, context)
     
     else:
         await update.message.reply_text("Используй кнопки меню для навигации.")
@@ -1842,6 +1899,83 @@ def main() -> None:
     application.add_handler(CommandHandler("link_master", admin_handlers.link_master_manually))
     application.add_handler(CommandHandler("masters_status", admin_handlers.show_all_masters_status))
     application.add_handler(CommandHandler("admin_help", admin_handlers.help_admin))
+    
+    # Debug команда для проверки environment variables
+    async def debug_env_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Команда для проверки environment variables (только для админов)"""
+        if not await is_admin(update, context):
+            await update.message.reply_text("❌ Эта команда доступна только администраторам.")
+            return
+        
+        import os
+        
+        debug_info = []
+        debug_info.append("🔍 ДИАГНОСТИКА ENVIRONMENT VARIABLES")
+        debug_info.append("=" * 40)
+        debug_info.append("")
+        
+        # Проверяем OpenAI API ключи
+        openai_variants = [
+            "OPENAI_API_KEY", "OPENAI_KEY", "OpenAI_API_Key", 
+            "OPEN_AI_API_KEY", "openai_api_key", "GPT_API_KEY"
+        ]
+        
+        found_keys = []
+        debug_info.append("🔑 ПРОВЕРКА OPENAI API КЛЮЧЕЙ:")
+        
+        for variant in openai_variants:
+            value = os.getenv(variant)
+            if value:
+                masked = value[:4] + "..." + value[-4:] if len(value) > 8 else "***"
+                debug_info.append(f"✅ {variant}: {masked}")
+                found_keys.append(variant)
+            else:
+                debug_info.append(f"❌ {variant}: НЕ НАЙДЕН")
+        
+        debug_info.append("")
+        debug_info.append("🧪 ТЕСТ GPT SERVICE:")
+        
+        try:
+            from services.gpt_service import GPTService
+            gpt = GPTService()
+            debug_info.append(f"✅ GPTService создан, fallback_mode: {gpt.fallback_mode}")
+            
+            if not gpt.fallback_mode:
+                debug_info.append("🎉 GPT API доступен!")
+                try:
+                    test_result = gpt.parse_time_slots("завтра в 14")
+                    if test_result:
+                        debug_info.append(f"✅ Тест парсинга успешен!")
+                    else:
+                        debug_info.append(f"⚠️ Парсинг вернул пустой результат")
+                except Exception as e:
+                    debug_info.append(f"❌ Ошибка тестирования GPT: {str(e)[:100]}...")
+            else:
+                debug_info.append("⚠️ GPT работает в fallback режиме")
+                
+        except Exception as e:
+            debug_info.append(f"❌ Ошибка создания GPTService: {e}")
+        
+        debug_info.append("")
+        debug_info.append("📋 НАЙДЕННЫЕ КЛЮЧИ:")
+        if found_keys:
+            for key in found_keys:
+                debug_info.append(f"   ✅ {key}")
+        else:
+            debug_info.append("   ❌ НИ ОДНОГО КЛЮЧА НЕ НАЙДЕНО")
+        
+        # Отправляем результат
+        message = "\n".join(debug_info)
+        
+        # Разбиваем на части если длинный
+        if len(message) > 4000:
+            parts = [message[i:i+4000] for i in range(0, len(message), 4000)]
+            for part in parts:
+                await update.message.reply_text(f"```\n{part}\n```", parse_mode='Markdown')
+        else:
+            await update.message.reply_text(f"```\n{message}\n```", parse_mode='Markdown')
+    
+    application.add_handler(CommandHandler("debug_env", debug_env_command))
     
     application.add_handler(CallbackQueryHandler(handle_callback_query))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
@@ -2598,6 +2732,290 @@ async def process_device_booking(update: Update, context: ContextTypes.DEFAULT_T
     
     # Планируем напоминание для девайса
     schedule_reminder(device_booking, is_equipment=True)
+    
+    # Уведомляем Фила о новой записи на виброкресло
+    if device_id == "vibro_chair":
+        await notify_device_owner_about_booking(context, device_booking)
 
 if __name__ == "__main__":
     main()
+
+async def show_vibro_chair_bookings(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Показывает все записи на виброкресло для владельца (Фила)."""
+    from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+    from datetime import datetime, timedelta
+    
+    data = load_data()
+    device_bookings = data.get("device_bookings", [])
+    
+    # Фильтруем записи только на виброкресло
+    vibro_bookings = [
+        booking for booking in device_bookings 
+        if booking.get("device_id") == "vibro_chair"
+    ]
+    
+    if not vibro_bookings:
+        await update.message.reply_text(
+            "🪑 **Мое виброкресло**\n\n"
+            "📅 Пока нет записей на виброкресло.\n"
+            "Когда кто-то запишется, ты увидишь их здесь!",
+            parse_mode='Markdown',
+            reply_markup=get_device_owner_keyboard()
+        )
+        return
+    
+    # Группируем записи по дням
+    today = datetime.now().date()
+    bookings_by_date = {}
+    
+    for booking in vibro_bookings:
+        booking_date = booking.get("slot_date")
+        if booking_date not in bookings_by_date:
+            bookings_by_date[booking_date] = []
+        bookings_by_date[booking_date].append(booking)
+    
+    # Формируем сообщение
+    message = "🪑 **Мое виброкресло**\n\n"
+    message += f"📅 Всего записей: {len(vibro_bookings)}\n\n"
+    
+    # Сортируем по датам
+    sorted_dates = sorted(bookings_by_date.keys())
+    
+    keyboard = []
+    
+    for date_str in sorted_dates:
+        date_bookings = bookings_by_date[date_str]
+        # Парсим дату
+        try:
+            booking_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+            if booking_date == today:
+                day_label = "Сегодня"
+            elif booking_date == today + timedelta(days=1):
+                day_label = "Завтра"
+            else:
+                day_label = booking_date.strftime("%d.%m")
+        except:
+            day_label = date_str
+        
+        message += f"📅 **{day_label} ({date_str})** - {len(date_bookings)} записей:\n"
+        
+        for booking in sorted(date_bookings, key=lambda x: x.get("slot_start_time", "")):
+            start_time = booking.get("slot_start_time", "")
+            end_time = booking.get("slot_end_time", "")
+            guest_name = booking.get("guest_username", "") or booking.get("guest_name", "Гость")
+            
+            message += f"🕐 {start_time}-{end_time} — {guest_name}\n"
+            
+            # Добавляем кнопку отмены для каждой записи
+            booking_id = booking.get("id", "")
+            if booking_id:
+                keyboard.append([
+                    InlineKeyboardButton(
+                        f"❌ Отменить {start_time} {guest_name[:10]}",
+                        callback_data=f"cancel_vibro_{booking_id}"
+                    )
+                ])
+        
+        message += "\n"
+    
+    # Добавляем кнопку "Назад"
+    keyboard.append([InlineKeyboardButton("⬅️ Назад", callback_data="back_to_device_menu")])
+    
+    await update.message.reply_text(
+        message,
+        parse_mode='Markdown',
+        reply_markup=InlineKeyboardMarkup(keyboard)
+    )
+
+async def handle_vibro_booking_cancel(update: Update, context: ContextTypes.DEFAULT_TYPE, booking_id: str) -> None:
+    """Обрабатывает отмену записи на виброкресло."""
+    from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+    
+    query = update.callback_query
+    await query.answer()
+    
+    # Находим запись по ID
+    data = load_data()
+    device_bookings = data.get("device_bookings", [])
+    
+    booking = None
+    for b in device_bookings:
+        if b.get("id") == booking_id:
+            booking = b
+            break
+    
+    if not booking:
+        await query.edit_message_text(
+            "❌ Запись не найдена. Возможно, она уже была отменена.",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("⬅️ Назад", callback_data="back_to_device_menu")]
+            ])
+        )
+        return
+    
+    # Получаем информацию о записи
+    guest_name = booking.get("guest_username", "") or booking.get("guest_name", "Гость")
+    start_time = booking.get("slot_start_time", "")
+    end_time = booking.get("slot_end_time", "")
+    slot_date = booking.get("slot_date", "")
+    
+    # Сохраняем ID записи для обработки причины отмены
+    user_id = str(query.from_user.id)
+    user_states[user_id] = {
+        "role": "client", 
+        "is_device_owner": True,
+        "awaiting": "vibro_cancel_reason",
+        "cancel_booking_id": booking_id
+    }
+    
+    await query.edit_message_text(
+        f"❌ **Отмена записи на виброкресло**\n\n"
+        f"📅 Дата: {slot_date}\n"
+        f"🕐 Время: {start_time}-{end_time}\n"
+        f"👤 Клиент: {guest_name}\n\n"
+        f"🖊️ **Укажи причину отмены:**\n"
+        f"(Эта причина будет отправлена клиенту)\n\n"
+        f"Напиши причину следующим сообщением ⬇️",
+        reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("🚫 Отменить отмену", callback_data="back_to_device_menu")]
+        ]),
+        parse_mode='Markdown'
+    )
+
+async def process_vibro_cancel_reason(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Обрабатывает причину отмены записи на виброкресло."""
+    user_id = str(update.effective_user.id)
+    user_state = user_states.get(user_id, {})
+    
+    cancel_reason = update.message.text
+    booking_id = user_state.get("cancel_booking_id")
+    
+    if not booking_id:
+        await update.message.reply_text(
+            "❌ Ошибка: не найден ID записи для отмены.",
+            reply_markup=get_device_owner_keyboard()
+        )
+        return
+    
+    # Находим и отменяем запись
+    data = load_data()
+    device_bookings = data.get("device_bookings", [])
+    
+    booking = None
+    booking_index = None
+    for i, b in enumerate(device_bookings):
+        if b.get("id") == booking_id:
+            booking = b
+            booking_index = i
+            break
+    
+    if not booking:
+        await update.message.reply_text(
+            "❌ Запись не найдена в базе данных.",
+            reply_markup=get_device_owner_keyboard()
+        )
+        return
+    
+    # Получаем информацию о записи для уведомления
+    guest_id = booking.get("guest_id")
+    guest_name = booking.get("guest_username", "") or booking.get("guest_name", "Гость")
+    start_time = booking.get("slot_start_time", "")
+    end_time = booking.get("slot_end_time", "")
+    slot_date = booking.get("slot_date", "")
+    device_name = "Виброакустическое кресло"
+    
+    # Удаляем запись из device_bookings
+    device_bookings.pop(booking_index)
+    
+    # Освобождаем слот в устройстве
+    devices = data.get("devices", [])
+    for device in devices:
+        if device.get("id") == "vibro_chair":
+            for slot in device.get("time_slots", []):
+                if (slot.get("date") == slot_date and 
+                    slot.get("start_time") == start_time):
+                    slot["is_booked"] = False
+                    break
+            break
+    
+    save_data(data)
+    
+    # Очищаем состояние пользователя
+    user_states[user_id] = {"role": "client", "is_device_owner": True}
+    
+    # Уведомляем клиента об отмене
+    if guest_id:
+        try:
+            await context.bot.send_message(
+                chat_id=guest_id,
+                text=f"❌ **Запись отменена**\n\n"
+                     f"🪑 **{device_name}**\n"
+                     f"📅 Дата: {slot_date}\n"
+                     f"🕐 Время: {start_time}-{end_time}\n\n"
+                     f"📝 **Причина отмены:**\n{cancel_reason}\n\n"
+                     f"Извини за неудобства! Ты можешь записаться на другое время.",
+                parse_mode='Markdown'
+            )
+        except Exception as e:
+            logger.error(f"Не удалось отправить уведомление об отмене клиенту {guest_id}: {e}")
+    
+    # Подтверждаем отмену Филу
+    await update.message.reply_text(
+        f"✅ **Запись успешно отменена!**\n\n"
+        f"📅 Дата: {slot_date}\n"
+        f"🕐 Время: {start_time}-{end_time}\n"
+        f"👤 Клиент: {guest_name}\n"
+        f"📝 Причина: {cancel_reason}\n\n"
+        f"{'📱 Клиент уведомлен' if guest_id else '⚠️ Не удалось уведомить клиента'}\n"
+        f"🪑 Слот снова доступен для записи.",
+        reply_markup=get_device_owner_keyboard(),
+        parse_mode='Markdown'
+    )
+
+async def notify_device_owner_about_booking(context: ContextTypes.DEFAULT_TYPE, device_booking: dict) -> None:
+    """Уведомляет владельца девайса о новой записи."""
+    device_id = device_booking.get("device_id")
+    
+    # Пока только для виброкресла Фила
+    if device_id != "vibro_chair":
+        return
+    
+    # ID Фила @fshubin - нужно будет получить из реальной системы
+    phil_id = None
+    
+    # Находим Фила в базе данных
+    data = load_data()
+    masters = data.get("masters", [])
+    
+    # Ищем @fshubin среди мастеров или пользователей
+    for master in masters:
+        if master.get("telegram_handle") == "@fshubin":
+            phil_id = master.get("telegram_id")
+            break
+    
+    # Если не нашли среди мастеров, можно использовать hardcoded ID
+    # Это временное решение, пока Фил не зарегистрируется через бота
+    if not phil_id:
+        # Здесь можно добавить hardcoded telegram_id Фила если известен
+        logger.warning("Не найден telegram_id для @fshubin, уведомление не отправлено")
+        return
+    
+    # Формируем уведомление
+    guest_name = device_booking.get("guest_username", "") or device_booking.get("guest_name", "Гость")
+    start_time = device_booking.get("slot_start_time", "")
+    end_time = device_booking.get("slot_end_time", "")
+    slot_date = device_booking.get("slot_date", "")
+    
+    try:
+        await context.bot.send_message(
+            chat_id=phil_id,
+            text=f"🪑 **Новая запись на виброкресло!**\n\n"
+                 f"👤 **Клиент:** {guest_name}\n"
+                 f"📅 **Дата:** {slot_date}\n"
+                 f"🕐 **Время:** {start_time}-{end_time}\n\n"
+                 f"📋 Для управления записями используй кнопку 'Мое виброкресло 🪑' в боте.",
+            parse_mode='Markdown'
+        )
+        logger.info(f"Уведомление о записи на виброкресло отправлено Филу (ID: {phil_id})")
+    except Exception as e:
+        logger.error(f"Не удалось отправить уведомление Филу (ID: {phil_id}): {e}")
