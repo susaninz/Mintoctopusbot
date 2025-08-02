@@ -620,17 +620,29 @@ async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TY
         return
     
     elif callback_data.startswith("device_slots_"):
-        parts = callback_data.split("_")
-        device_id = parts[2]
-        date_str = parts[3]
+        # Правильно парсим device_slots_vibro_chair_2025-08-02
+        # Используем split с ограничением, чтобы корректно извлечь device_id и дату
+        prefix = "device_slots_"
+        remainder = callback_data[len(prefix):]
+        # Дата всегда в конце в формате YYYY-MM-DD, найдем её
+        parts = remainder.rsplit("_", 1)  # Разделяем справа на 2 части
+        device_id = parts[0]  # vibro_chair
+        date_str = parts[1]   # 2025-08-02
         await show_device_day_slots(update, context, device_id, date_str)
         return
     
     elif callback_data.startswith("confirm_device_booking_"):
-        parts = callback_data.split("_")
-        device_id = parts[3]
-        date_str = parts[4]
-        start_time = parts[5]
+        # Правильно парсим confirm_device_booking_vibro_chair_2025-08-02_09:00
+        prefix = "confirm_device_booking_"
+        remainder = callback_data[len(prefix):]
+        # Время всегда в конце в формате HH:MM, найдем его
+        parts = remainder.rsplit("_", 1)  # Разделяем справа на 2 части: "vibro_chair_2025-08-02" и "09:00"
+        start_time = parts[1]  # 09:00
+        date_and_device = parts[0]  # vibro_chair_2025-08-02
+        # Теперь разделяем дату и device_id
+        date_parts = date_and_device.rsplit("_", 1)  # Разделяем справа: "vibro_chair" и "2025-08-02"
+        device_id = date_parts[0]  # vibro_chair
+        date_str = date_parts[1]   # 2025-08-02
         await process_device_booking(update, context, device_id, date_str, start_time)
         return
     
