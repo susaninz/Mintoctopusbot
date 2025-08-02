@@ -134,18 +134,23 @@ def emergency_restore():
         
         # Проверяем нужно ли восстанавливать файл
         needs_restore = False
+        current_size = 0
         
         if not os.path.exists(file_path):
             needs_restore = True
             logger.info(f"💾 {filename} не существует")
-        elif filename == "database.json" and os.path.getsize(file_path) < 50000:  # ПРИНУДИТЕЛЬНО для database.json
-            needs_restore = True
+        else:
             current_size = os.path.getsize(file_path)
-            logger.info(f"🚨 ПРИНУДИТЕЛЬНАЯ ПЕРЕЗАПИСЬ {filename} ({current_size} байт < 50KB), восстанавливаем РЕАЛЬНЫЕ данные")
-        elif os.path.getsize(file_path) < 100:  # Для остальных файлов
-            needs_restore = True
-            current_size = os.path.getsize(file_path)
-            logger.info(f"💾 {filename} слишком мал ({current_size} байт), восстанавливаем")
+            logger.info(f"🔍 ДИАГНОСТИКА {filename}: размер {current_size} байт")
+            
+            if filename == "database.json":
+                logger.info(f"🔍 ПРОВЕРКА database.json: {current_size} < 50000? {current_size < 50000}")
+                if current_size < 50000:  # ПРИНУДИТЕЛЬНО для database.json
+                    needs_restore = True
+                    logger.info(f"🚨 ПРИНУДИТЕЛЬНАЯ ПЕРЕЗАПИСЬ {filename} ({current_size} байт < 50KB), восстанавливаем РЕАЛЬНЫЕ данные")
+            elif current_size < 100:  # Для остальных файлов
+                needs_restore = True
+                logger.info(f"💾 {filename} слишком мал ({current_size} байт), восстанавливаем")
         
         if needs_restore:
             logger.info(f"🔥 ПРИНУДИТЕЛЬНО ПЕРЕЗАПИСЫВАЕМ {filename}")
