@@ -14,6 +14,8 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from services.gpt_service import GPTService
 from bot.services.data_service import DataService
 from bot.handlers.admin_handlers import AdminHandlers
+from services.bug_reporter import bug_reporter
+from services.safe_data_manager import safe_data_manager
 from utils import format_date_for_user, format_slot_for_user, format_slots_list
 from bot_middleware import with_error_handling, with_rate_limiting, telegram_retry
 from secure_logger import setup_secure_logging, secure_log_user_action
@@ -67,20 +69,13 @@ def get_user_state(user_id: str):
     return user_states[user_id]
 
 def load_data():
-    """Загружает данные из JSON файла."""
-    try:
-        if os.path.exists("data/database.json"):
-            with open("data/database.json", "r", encoding="utf-8") as f:
-                return json.load(f)
-    except:
-        pass
-    return {"masters": [], "users": {}}
+    """Загружает данные из JSON файла через безопасный менеджер."""
+    return safe_data_manager.get_data()
 
-def save_data(data):
-    """Сохраняет данные в JSON файл."""
-    os.makedirs("data", exist_ok=True)
-    with open("data/database.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+def save_data(data, reason="update"):
+    """Сохраняет данные через безопасный менеджер."""
+    safe_data_manager.data = data
+    return safe_data_manager.save_data(reason)
 
 def get_main_keyboard():
     """Клавиатура выбора роли."""
@@ -677,6 +672,16 @@ async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TY
     elif callback_data.startswith("edit_slot_"):
         slot_index = int(callback_data.split("_")[-1])
         await edit_slot_request(query, master, slot_index)
+    
+    # Обработка багрепортов
+    elif callback_data.startswith("bug_"):
+        if callback_data == "bug_cancel":
+            await query.edit_message_text("❌ Отменено. Если возникнут проблемы, используй /bug")
+        elif callback_data in ["bug_critical", "bug_normal", "bug_suggestion"]:
+            bug_type = callback_data.split("_")[1]
+            await bug_reporter.handle_bug_type_selection(update, context, bug_type)
+        elif callback_data == "bug_my_reports":
+            await query.edit_message_text("📋 Функция просмотра отчетов в разработке")
 
 async def handle_booking_response(update: Update, context: ContextTypes.DEFAULT_TYPE, callback_data: str) -> None:
     """Обрабатывает подтверждение или отклонение записи мастером."""
@@ -1058,6 +1063,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     # Обрабатываем новый профиль мастера
     if user_state.get("awaiting") == "new_profile":
         await process_new_profile(update, context)
+        return
+    
+    # Обрабатываем описание бага
+    if 'bug_report' in context.user_data:
+        await bug_reporter.handle_bug_description(update, context)
         return
     
     # Обрабатываем добавление слотов
@@ -1799,6 +1809,7 @@ def main() -> None:
     # Добавляем обработчики
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("test_reminder", test_reminder))
+    application.add_handler(CommandHandler("bug", bug_reporter.handle_bug_report_start))
     
     # Админ команды
     application.add_handler(CommandHandler("pending_masters", admin_handlers.show_pending_masters))
