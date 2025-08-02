@@ -16,6 +16,7 @@ from bot.services.data_service import DataService
 from bot.handlers.admin_handlers import AdminHandlers
 from services.bug_reporter import bug_reporter
 from services.safe_data_manager import safe_data_manager
+import utils
 from utils import format_date_for_user, format_slot_for_user, format_slots_list
 from bot_middleware import with_error_handling, with_rate_limiting, telegram_retry
 from secure_logger import setup_secure_logging, secure_log_user_action
