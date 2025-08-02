@@ -2068,7 +2068,6 @@ GPT_SERVICE: {gpt_status}
         
         async def run_production():
             # Запускаем application с webhook режимом
-            # post_init уже настроен выше и запустит health server
             import signal
             import asyncio
             
@@ -2084,13 +2083,24 @@ GPT_SERVICE: {gpt_status}
                 loop.add_signal_handler(sig, signal_handler)
             
             try:
-                # Запускаем приложение
+                # ЭКСТРЕННО: Запускаем HTTP сервер СРАЗУ для healthcheck
+                port = int(os.getenv("PORT", 8080))
+                logger.info(f"🚀 ЭКСТРЕННЫЙ HTTP сервер запуск на порту {port}...")
+                start_simple_webhook_server(application, port, asyncio.get_running_loop())
+                logger.info(f"✅ HTTP сервер запущен для healthcheck!")
+                
+                # Небольшая пауза чтобы сервер успел подняться
+                await asyncio.sleep(2)
+                
+                # Запускаем telegram application
+                logger.info("🤖 Инициализация Telegram bot...")
                 await application.initialize()
                 await application.start()
                 
-                # КРИТИЧНО: Вызываем post_init вручную в production!
-                logger.info("🔧 Вызываем post_init для запуска HTTP сервера...")
-                await post_init(application)
+                # Вызываем остальную инициализацию
+                logger.info("📅 Запуск планировщика...")
+                scheduler.start()
+                logger.info("✅ Полная инициализация завершена!")
                 
                 # Ждем сигнала остановки
                 await stop_event.wait()
