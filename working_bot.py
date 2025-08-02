@@ -1129,12 +1129,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await process_new_profile(update, context)
         return
     
-    # Обрабатываем причину отмены записи на виброкресло
-    if user_state.get("awaiting") == "vibro_cancel_reason":
-        await process_vibro_cancel_reason(update, context)
-        return
-    
-    # Обрабатываем описание бага (но сначала проверяем что это не системная кнопка)
+    # ПРИОРИТЕТ: Обрабатываем описание бага ПЕРВЫМ (но сначала проверяем что это не системная кнопка)
     if 'bug_report' in context.user_data:
         # Список системных кнопок, которые должны работать даже во время багрепорта
         system_buttons = [CHANGE_ROLE, BACK_TO_MENU, MASTER_ROLE, CLIENT_ROLE]
@@ -1147,6 +1142,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             if 'bug_report' in context.user_data:
                 del context.user_data['bug_report']
             # Продолжаем обработку кнопки ниже
+    
+    # Обрабатываем причину отмены записи на виброкресло
+    if user_state.get("awaiting") == "vibro_cancel_reason":
+        await process_vibro_cancel_reason(update, context)
+        return
     
     # Обрабатываем добавление слотов
     if user_state.get("awaiting") == "add_slots":
