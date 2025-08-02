@@ -138,18 +138,39 @@ def emergency_restore():
         if not os.path.exists(file_path):
             needs_restore = True
             logger.info(f"💾 {filename} не существует")
-        elif os.path.getsize(file_path) < 10000:  # Минимальный размер для реальной БД
+        elif filename == "database.json" and os.path.getsize(file_path) < 50000:  # ПРИНУДИТЕЛЬНО для database.json
+            needs_restore = True
+            current_size = os.path.getsize(file_path)
+            logger.info(f"🚨 ПРИНУДИТЕЛЬНАЯ ПЕРЕЗАПИСЬ {filename} ({current_size} байт < 50KB), восстанавливаем РЕАЛЬНЫЕ данные")
+        elif os.path.getsize(file_path) < 100:  # Для остальных файлов
             needs_restore = True
             current_size = os.path.getsize(file_path)
             logger.info(f"💾 {filename} слишком мал ({current_size} байт), восстанавливаем")
         
         if needs_restore:
-            logger.info(f"💾 Creating {filename}")
+            logger.info(f"🔥 ПРИНУДИТЕЛЬНО ПЕРЕЗАПИСЫВАЕМ {filename}")
+            
+            # Создаем backup перед перезаписью
+            if os.path.exists(file_path):
+                backup_path = file_path + f".backup_{datetime.now().strftime('%H%M%S')}"
+                import shutil
+                shutil.copy2(file_path, backup_path)
+                logger.info(f"💾 Backup создан: {backup_path}")
+            
+            # Перезаписываем файл
             with open(file_path, 'w', encoding='utf-8') as f:
-                json.dump(json.loads(content), f, ensure_ascii=False, indent=2)
-            logger.info(f"✅ Created {filename}")
+                if isinstance(content, str):
+                    # Если content уже строка, парсим и записываем как JSON
+                    json.dump(json.loads(content), f, ensure_ascii=False, indent=2)
+                else:
+                    # Если content уже dict, записываем напрямую
+                    json.dump(content, f, ensure_ascii=False, indent=2)
+            
+            new_size = os.path.getsize(file_path)
+            logger.info(f"✅ ПРИНУДИТЕЛЬНО СОЗДАН {filename} ({new_size} байт)")
         else:
-            logger.info(f"✅ {filename} already exists and looks good")
+            current_size = os.path.getsize(file_path)
+            logger.info(f"✅ {filename} already exists and looks good ({current_size} байт)")
     
     # Создаем папку backups
     backups_path = os.path.join(volume_path, "backups")
