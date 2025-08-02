@@ -67,6 +67,18 @@ def hotfix_database_force():
     # Пути
     database_path = "/app/data/database.json"
     
+    # КРИТИЧНО: Проверяем что volume примонтирован
+    if not os.path.exists("/app/data"):
+        print("🚨 КРИТИЧЕСКАЯ ОШИБКА: /app/data НЕ СУЩЕСТВУЕТ!")
+        print("🔍 Volume НЕ ПРИМОНТИРОВАН или Railway контейнер некорректен")
+        print("📋 Список доступных путей в /app:")
+        try:
+            for item in os.listdir("/app"):
+                print(f"  - {item}")
+        except:
+            print("  ❌ /app недоступен")
+        return False
+    
     # Проверяем текущее состояние
     if os.path.exists(database_path):
         current_size = os.path.getsize(database_path)
@@ -77,9 +89,13 @@ def hotfix_database_force():
         shutil.copy2(database_path, backup_path)
         print(f"💾 Backup создан: {backup_path}")
     else:
-        print("❌ database.json НЕ СУЩЕСТВУЕТ!")
-        # Создаем папку если нужно
-        os.makedirs("/app/data", exist_ok=True)
+        print("❌ database.json НЕ СУЩЕСТВУЕТ в примонтированном volume!")
+        print("🔍 Содержимое /app/data:")
+        try:
+            for item in os.listdir("/app/data"):
+                print(f"  - {item}")
+        except:
+            print("  ❌ /app/data недоступен для чтения")
     
     # ПРИНУДИТЕЛЬНО перезаписываем
     try:
