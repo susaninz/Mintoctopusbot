@@ -1878,9 +1878,11 @@ def start_simple_webhook_server(telegram_app, port, main_loop=None):
             # Автоматический перезапуск сервера при ошибке
             run_server()
     
-    thread = threading.Thread(target=run_server, daemon=True)
+    # ДИАГНОСТИКА: Делаем thread НЕ daemon чтобы он держал процесс
+    thread = threading.Thread(target=run_server, daemon=False)
     thread.start()
-    logger.info(f"🚀 HTTP сервер поток запущен на порту {port}")
+    logger.info(f"🚀 HTTP сервер поток запущен на порту {port} (НЕ daemon)")
+    logger.info("🔍 HTTP thread будет держать процесс живым!")
 
 def main() -> None:
     """Запускает бота."""
@@ -2083,27 +2085,63 @@ GPT_SERVICE: {gpt_status}
                 loop.add_signal_handler(sig, signal_handler)
             
             try:
-                # ЭКСТРЕННО: Запускаем HTTP сервер СРАЗУ для healthcheck
-                port = int(os.getenv("PORT", 8080))
-                logger.info(f"🚀 ЭКСТРЕННЫЙ HTTP сервер запуск на порту {port}...")
-                start_simple_webhook_server(application, port, asyncio.get_running_loop())
-                logger.info(f"✅ HTTP сервер запущен для healthcheck!")
+                # ДИАГНОСТИКА: Детальное логирование каждого шага
+                logger.info("🔍 НАЧАЛО PRODUCTION STARTUP SEQUENCE")
                 
-                # Небольшая пауза чтобы сервер успел подняться
-                await asyncio.sleep(2)
+                # Шаг 1: HTTP сервер
+                try:
+                    port = int(os.getenv("PORT", 8080))
+                    logger.info(f"🚀 ШАГ 1: Запуск HTTP сервера на порту {port}...")
+                    start_simple_webhook_server(application, port, asyncio.get_running_loop())
+                    logger.info(f"✅ ШАГ 1: HTTP сервер запущен успешно!")
+                except Exception as e:
+                    logger.error(f"💥 ШАГ 1 ПРОВАЛЕН: HTTP сервер - {e}")
+                    raise
                 
-                # Запускаем telegram application
-                logger.info("🤖 Инициализация Telegram bot...")
-                await application.initialize()
-                await application.start()
+                # Шаг 2: Пауза стабилизации
+                try:
+                    logger.info("⏰ ШАГ 2: Пауза стабилизации 2 секунды...")
+                    await asyncio.sleep(2)
+                    logger.info("✅ ШАГ 2: Пауза завершена")
+                except Exception as e:
+                    logger.error(f"💥 ШАГ 2 ПРОВАЛЕН: Пауза - {e}")
+                    raise
                 
-                # Вызываем остальную инициализацию
-                logger.info("📅 Запуск планировщика...")
-                scheduler.start()
-                logger.info("✅ Полная инициализация завершена!")
+                # Шаг 3: Telegram bot initialization
+                try:
+                    logger.info("🤖 ШАГ 3: Инициализация Telegram bot...")
+                    await application.initialize()
+                    logger.info("✅ ШАГ 3A: application.initialize() завершен")
+                    
+                    await application.start()
+                    logger.info("✅ ШАГ 3B: application.start() завершен")
+                    logger.info("✅ ШАГ 3: Telegram bot полностью инициализирован!")
+                except Exception as e:
+                    logger.error(f"💥 ШАГ 3 ПРОВАЛЕН: Telegram bot - {e}")
+                    import traceback
+                    logger.error(f"💥 ШАГ 3 TRACEBACK: {traceback.format_exc()}")
+                    raise
                 
-                # Ждем сигнала остановки
-                await stop_event.wait()
+                # Шаг 4: Планировщик
+                try:
+                    logger.info("📅 ШАГ 4: Запуск планировщика...")
+                    scheduler.start()
+                    logger.info("✅ ШАГ 4: Планировщик запущен успешно!")
+                except Exception as e:
+                    logger.error(f"💥 ШАГ 4 ПРОВАЛЕН: Планировщик - {e}")
+                    import traceback
+                    logger.error(f"💥 ШАГ 4 TRACEBACK: {traceback.format_exc()}")
+                    # Планировщик не критичен, продолжаем
+                
+                logger.info("🎉 ВСЕ ШАГИ ЗАВЕРШЕНЫ! Приложение готово!")
+                logger.info("⏳ Переход в режим ожидания...")
+                
+                # Шаг 5: Ожидание
+                try:
+                    await stop_event.wait()
+                except Exception as e:
+                    logger.error(f"💥 ШАГ 5 ПРОВАЛЕН: Ожидание - {e}")
+                    raise
                 
             finally:
                 await application.stop()
