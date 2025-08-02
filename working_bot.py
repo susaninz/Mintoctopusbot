@@ -1691,15 +1691,22 @@ def start_simple_webhook_server(telegram_app, port, main_loop=None):
     from http.server import HTTPServer, BaseHTTPRequestHandler
     import threading
     import json
+    from datetime import datetime
     
     class WebhookHandler(BaseHTTPRequestHandler):
         event_loop = main_loop  # Сохраняем reference на main event loop
         def do_GET(self):
             if self.path == '/health':
+                # Простой и быстрый healthcheck без внешних API вызовов
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
-                self.wfile.write(b'{"status": "ok"}')
+                response = {
+                    "status": "ok", 
+                    "timestamp": datetime.now().isoformat(),
+                    "service": "mintoctopus_bot"
+                }
+                self.wfile.write(json.dumps(response).encode('utf-8'))
                 logger.info("✅ Health check запрос обработан")
             else:
                 self.send_response(404)
@@ -1749,8 +1756,14 @@ def start_simple_webhook_server(telegram_app, port, main_loop=None):
     
     def run_server():
         server = HTTPServer(('0.0.0.0', port), WebhookHandler)
+        server.timeout = 30  # Добавляем timeout для предотвращения зависаний
         logger.info(f"🌐 HTTP сервер запущен на порту {port}")
-        server.serve_forever()
+        try:
+            server.serve_forever()
+        except Exception as e:
+            logger.error(f"❌ HTTP сервер ошибка: {e}")
+            # Автоматический перезапуск сервера при ошибке
+            run_server()
     
     thread = threading.Thread(target=run_server, daemon=True)
     thread.start()
