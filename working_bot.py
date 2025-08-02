@@ -1900,10 +1900,16 @@ def main() -> None:
     application.add_handler(CommandHandler("masters_status", admin_handlers.show_all_masters_status))
     application.add_handler(CommandHandler("admin_help", admin_handlers.help_admin))
     
+    # Простая проверка админа по user_id
+    def is_admin_user(user_id: int) -> bool:
+        """Проверяет является ли пользователь админом"""
+        admin_ids = [78273571]  # Твой user_id
+        return user_id in admin_ids
+    
     # Debug команда для проверки environment variables
     async def debug_env_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Команда для проверки environment variables (только для админов)"""
-        if not await is_admin(update, context):
+        if not is_admin_user(update.effective_user.id):
             await update.message.reply_text("❌ Эта команда доступна только администраторам.")
             return
         
@@ -1975,7 +1981,39 @@ def main() -> None:
         else:
             await update.message.reply_text(f"```\n{message}\n```", parse_mode='Markdown')
     
+    # Простая команда диагностики без проверок админа
+    async def simple_debug(update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Простая диагностика environment без admin проверки"""
+        try:
+            import os
+            
+            # Проверяем основные переменные
+            bot_token = "НАЙДЕН" if os.getenv("BOT_TOKEN") or os.getenv("TELEGRAM_TOKEN") else "НЕ НАЙДЕН"
+            openai_key = "НАЙДЕН" if os.getenv("OPENAI_API_KEY") else "НЕ НАЙДЕН"
+            
+            # Проверяем GPT Service
+            try:
+                from services.gpt_service import GPTService
+                gpt = GPTService()
+                gpt_status = f"Fallback: {gpt.fallback_mode}"
+            except Exception as e:
+                gpt_status = f"ОШИБКА: {str(e)[:50]}"
+            
+            message = f"""🔍 БЫСТРАЯ ДИАГНОСТИКА:
+            
+BOT_TOKEN: {bot_token}
+OPENAI_API_KEY: {openai_key}
+GPT_SERVICE: {gpt_status}
+
+Время: {datetime.now().strftime('%H:%M:%S')}"""
+            
+            await update.message.reply_text(message)
+            
+        except Exception as e:
+            await update.message.reply_text(f"Ошибка диагностики: {e}")
+    
     application.add_handler(CommandHandler("debug_env", debug_env_command))
+    application.add_handler(CommandHandler("diag", simple_debug))
     
     application.add_handler(CallbackQueryHandler(handle_callback_query))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
