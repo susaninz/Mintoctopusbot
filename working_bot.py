@@ -30,25 +30,12 @@ setup_secure_logging(level=os.getenv("LOG_LEVEL", "INFO"))
 logger = logging.getLogger(__name__)
 
 # Константы для кнопок
-MASTER_ROLE = "Я мну 🐙"
-CLIENT_ROLE = "Хочу, чтобы меня помяли 🙏"
-
-# Кнопки для мастеров
-MY_SLOTS = "Мои слоты 📋"
-ADD_SLOTS = "Добавить слоты ➕"
-MY_PROFILE = "Мой профиль 👤"
-EDIT_PROFILE = "Изменить профиль ✏️"
-
-# Кнопки для гостей  
-VIEW_MASTERS = "Мастера 👥"
-VIEW_DEVICES = "Девайсы заповедника 🔬"
-VIEW_FREE_SLOTS = "Свободные слоты 📅"
-MY_BOOKINGS = "Мои записи 📋"
-
-# Общие кнопки
-BACK_TO_MENU = "Главное меню 🏠"
-CHANGE_ROLE = "Сменить роль 🔄"
-REPORT_BUG = "Сообщить о проблеме 🐛"
+# Импортируем все константы из bot.constants
+from bot.constants import (
+    MASTER_ROLE, CLIENT_ROLE, MY_SLOTS, ADD_SLOTS, MY_PROFILE, EDIT_PROFILE,
+    VIEW_MASTERS, VIEW_DEVICES, VIEW_FREE_SLOTS, MY_BOOKINGS, 
+    BACK_TO_MENU, CHANGE_ROLE, REPORT_BUG
+)
 
 # Хранилище состояний пользователей
 user_states = {}
@@ -584,6 +571,19 @@ async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TY
         await show_slots_by_date(update, context, selected_date)
         return
     
+    elif callback_data == "slots_custom_date":
+        await query.edit_message_text(
+            "📅 **Выбор даты**\n\n"
+            "Введи дату в формате ДД.ММ.ГГГГ\n"
+            "Например: 15.01.2025\n\n"
+            "Или используй кнопки выше для быстрого выбора.",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("⬅️ Назад к датам", callback_data="slots_menu")]
+            ]),
+            parse_mode='Markdown'
+        )
+        return
+    
     elif callback_data == "slots_menu":
         await show_free_slots_menu(update, context)
         return
@@ -678,8 +678,8 @@ async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TY
     elif callback_data.startswith("bug_"):
         if callback_data == "bug_cancel":
             await query.edit_message_text("❌ Отменено. Если возникнут проблемы, используй /bug")
-        elif callback_data in ["bug_critical", "bug_normal", "bug_suggestion"]:
-            bug_type = callback_data.split("_")[1]
+        elif callback_data in ["bug_critical", "bug_normal", "bug_suggestion", "bug_problem"]:
+            bug_type = callback_data.split("_")[1] if callback_data != "bug_problem" else "problem"
             await bug_reporter.handle_bug_type_selection(update, context, bug_type)
         elif callback_data == "bug_my_reports":
             await query.edit_message_text("📋 Функция просмотра отчетов в разработке")
