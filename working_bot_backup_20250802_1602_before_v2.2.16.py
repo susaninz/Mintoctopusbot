@@ -20,7 +20,6 @@ from formatting_utils import format_date_for_user, format_slot_for_user, format_
 from bot_middleware import with_error_handling, with_rate_limiting, telegram_retry
 from secure_logger import setup_secure_logging, secure_log_user_action
 from health_check import init_health_checker
-from emergency_restore import emergency_restore
 # from health_server import start_health_server, set_telegram_application  # Импортируем только в production
 
 # Загружаем переменные окружения
@@ -2834,15 +2833,6 @@ async def process_device_booking(update: Update, context: ContextTypes.DEFAULT_T
         await notify_device_owner_about_booking(context, device_booking)
 
 if __name__ == "__main__":
-    # 🚨 EMERGENCY DATA RESTORATION
-    print("🔧 Проверяем и восстанавливаем данные...")
-    try:
-        emergency_restore()
-        print("✅ Данные восстановлены или уже в порядке")
-    except Exception as e:
-        print(f"❌ Ошибка восстановления данных: {e}")
-        logger.exception("Ошибка emergency_restore")
-    
     main()
 
 async def show_vibro_chair_bookings(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
