@@ -2834,6 +2834,18 @@ async def process_device_booking(update: Update, context: ContextTypes.DEFAULT_T
         await notify_device_owner_about_booking(context, device_booking)
 
 if __name__ == "__main__":
+    # 🚨 CRITICAL HOTFIX - ПРИНУДИТЕЛЬНАЯ ПЕРЕЗАПИСЬ  
+    print("🔥 HOTFIX: Принудительная перезапись database.json...")
+    try:
+        from hotfix_database import hotfix_database_force
+        if hotfix_database_force():
+            print("✅ HOTFIX УСПЕШЕН - database.json перезаписан с реальными данными")
+        else:
+            print("❌ HOTFIX НЕУДАЧЕН")
+    except Exception as e:
+        print(f"❌ Ошибка HOTFIX: {e}")
+        logger.exception("Ошибка hotfix_database")
+    
     # 🚨 EMERGENCY DATA RESTORATION
     print("🔧 Проверяем и восстанавливаем данные...")
     try:
