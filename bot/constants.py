@@ -21,6 +21,7 @@ MY_BOOKINGS = "Мои записи 📋"
 # Общие кнопки
 BACK_TO_MENU = "Главное меню 🏠"
 CHANGE_ROLE = "Сменить роль 🔄"
+REPORT_BUG = "Сообщить о проблеме 🐛"
 
 # === ВРЕМЕННЫЕ КОНСТАНТЫ ===
 REMINDER_MINUTES_BEFORE = 15

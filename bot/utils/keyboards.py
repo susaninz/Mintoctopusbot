@@ -4,7 +4,7 @@
 from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from bot.constants import (
     MASTER_ROLE, CLIENT_ROLE, MY_SLOTS, ADD_SLOTS, MY_PROFILE, EDIT_PROFILE,
-    VIEW_MASTERS, VIEW_DEVICES, VIEW_FREE_SLOTS, MY_BOOKINGS, BACK_TO_MENU, CHANGE_ROLE
+    VIEW_MASTERS, VIEW_DEVICES, VIEW_FREE_SLOTS, MY_BOOKINGS, BACK_TO_MENU, CHANGE_ROLE, REPORT_BUG
 )
 
 
@@ -32,7 +32,8 @@ def get_master_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup([
         [MY_SLOTS, ADD_SLOTS],
         [MY_PROFILE, EDIT_PROFILE],
-        [CHANGE_ROLE, BACK_TO_MENU]
+        [VIEW_MASTERS, VIEW_FREE_SLOTS],
+        [CHANGE_ROLE, REPORT_BUG]
     ], resize_keyboard=True)
 
 
@@ -46,7 +47,7 @@ def get_client_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup([
         [VIEW_MASTERS, VIEW_DEVICES],
         [VIEW_FREE_SLOTS, MY_BOOKINGS],
-        [CHANGE_ROLE]
+        [CHANGE_ROLE, REPORT_BUG]
     ], resize_keyboard=True)
 
 

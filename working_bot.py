@@ -48,6 +48,7 @@ MY_BOOKINGS = "Мои записи 📋"
 # Общие кнопки
 BACK_TO_MENU = "Главное меню 🏠"
 CHANGE_ROLE = "Сменить роль 🔄"
+REPORT_BUG = "Сообщить о проблеме 🐛"
 
 # Хранилище состояний пользователей
 user_states = {}
@@ -87,7 +88,7 @@ def get_master_keyboard():
         [MY_SLOTS, ADD_SLOTS],
         [MY_PROFILE, EDIT_PROFILE],
         [VIEW_MASTERS, VIEW_FREE_SLOTS],
-        [CHANGE_ROLE]
+        [CHANGE_ROLE, REPORT_BUG]
     ], resize_keyboard=True)
 
 def get_client_keyboard():
@@ -95,7 +96,7 @@ def get_client_keyboard():
     return ReplyKeyboardMarkup([
         [VIEW_MASTERS, VIEW_DEVICES],
         [VIEW_FREE_SLOTS, MY_BOOKINGS],
-        [CHANGE_ROLE]
+        [CHANGE_ROLE, REPORT_BUG]
     ], resize_keyboard=True)
 
 def generate_reminder_text(is_master: bool, master_name: str, client_name: str, slot_time: str, slot_location: str) -> str:
@@ -1327,6 +1328,9 @@ async def handle_master_buttons(update: Update, context: ContextTypes.DEFAULT_TY
     elif text == CHANGE_ROLE:
         await start(update, context)
     
+    elif text == REPORT_BUG:
+        await bug_reporter.handle_bug_report_start(update, context)
+    
     else:
         await update.message.reply_text("Используй кнопки меню для навигации.")
 
@@ -1351,6 +1355,9 @@ async def handle_client_buttons(update: Update, context: ContextTypes.DEFAULT_TY
     
     elif text == CHANGE_ROLE:
         await start(update, context)
+    
+    elif text == REPORT_BUG:
+        await bug_reporter.handle_bug_report_start(update, context)
     
     else:
         await update.message.reply_text("Используй кнопки меню для навигации.")
