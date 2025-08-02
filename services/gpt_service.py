@@ -23,14 +23,18 @@ class GPTService:
         """
         Инициализация GPT сервиса.
         
-        Raises:
-            ValueError: Если OPENAI_API_KEY не установлен
+        Notes:
+            Если OPENAI_API_KEY не установлен, работает в fallback режиме
         """
         api_key = os.getenv("OPENAI_API_KEY")
-        if not api_key:
-            raise ValueError("OPENAI_API_KEY не установлен в переменных окружения")
-        
-        self.client = openai.OpenAI(api_key=api_key)
+        if api_key:
+            self.client = openai.OpenAI(api_key=api_key)
+            self.fallback_mode = False
+            logger.info("GPTService инициализирован с OpenAI API")
+        else:
+            self.client = None
+            self.fallback_mode = True
+            logger.warning("GPTService работает в fallback режиме (нет OPENAI_API_KEY)")
         
     async def _retry_gpt_call(self, func, *args, max_retries: int = 3, **kwargs) -> Any:
         """
@@ -273,6 +277,10 @@ class GPTService:
             Список слотов в формате [{"date": "2025-08-02", "start_time": "14:00", "end_time": "15:00", "location": "баня"}]
         """
         
+        # Если GPT недоступен, используем простой fallback парсер
+        if self.fallback_mode:
+            return self._fallback_parse_time_slots(slots_text)
+        
         # Получаем актуальную информацию о времени и датах
         from utils.timezone_utils import get_relative_date_info
         time_info = get_relative_date_info()
@@ -342,6 +350,96 @@ class GPTService:
             
         except Exception as e:
             logger.error(f"Ошибка при парсинге слотов с GPT: {e}")
+            # В случае ошибки GPT, пытаемся fallback парсер
+            logger.info("Используем fallback парсер из-за ошибки GPT")
+            return self._fallback_parse_time_slots(slots_text)
+    
+    def _fallback_parse_time_slots(self, slots_text: str) -> List[Dict]:
+        """
+        Простой fallback парсер слотов без GPT.
+        
+        Args:
+            slots_text: Текст с описанием слотов
+            
+        Returns:
+            Список слотов или пустой список если не удалось распарсить
+        """
+        try:
+            from utils.timezone_utils import get_relative_date_info
+            import re
+            
+            time_info = get_relative_date_info()
+            today_date = time_info['current_date']
+            tomorrow_date = time_info['tomorrow_date']
+            
+            slots = []
+            text_lower = slots_text.lower()
+            
+            # Определяем дату
+            date = today_date
+            if 'завтра' in text_lower:
+                date = tomorrow_date
+            elif 'сегодня' in text_lower:
+                date = today_date
+            
+            # Определяем локацию
+            location = "Баня"  # по умолчанию
+            if 'глэмпинг' in text_lower:
+                location = "Глэмпинг"
+            elif 'спасалк' in text_lower:
+                location = "Спасалка"
+            elif 'бан' in text_lower:
+                location = "Баня"
+            
+            # Ищем время
+            time_patterns = [
+                r'(\d{1,2})\s*(утра|дня|вечера)',
+                r'(\d{1,2}):(\d{2})',
+                r'(\d{1,2})\s*час',
+                r'в\s*(\d{1,2})'
+            ]
+            
+            start_hour = None
+            for pattern in time_patterns:
+                match = re.search(pattern, text_lower)
+                if match:
+                    hour = int(match.group(1))
+                    # Корректируем время для утра/дня/вечера
+                    if len(match.groups()) > 1 and match.group(2):
+                        time_period = match.group(2)
+                        if time_period == 'утра' and hour < 12:
+                            start_hour = hour
+                        elif time_period == 'дня' and hour < 12:
+                            start_hour = hour + 12 if hour != 12 else 12
+                        elif time_period == 'вечера':
+                            start_hour = hour + 12 if hour < 12 else hour
+                        else:
+                            start_hour = hour
+                    else:
+                        start_hour = hour
+                    break
+            
+            if start_hour is not None:
+                # Создаем слот на 1 час по умолчанию
+                start_time = f"{start_hour:02d}:00"
+                end_hour = start_hour + 1
+                end_time = f"{end_hour:02d}:00"
+                
+                slot = {
+                    "date": date,
+                    "start_time": start_time,
+                    "end_time": end_time,
+                    "location": location,
+                    "duration_minutes": 60
+                }
+                slots.append(slot)
+                
+                logger.info(f"Fallback парсер создал слот: {slot}")
+            
+            return slots
+            
+        except Exception as e:
+            logger.error(f"Ошибка в fallback парсере: {e}")
             return []
 
     def process_master_profile(self, profile_text: str) -> Tuple[Dict, str]:
