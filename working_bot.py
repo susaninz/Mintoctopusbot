@@ -682,7 +682,17 @@ async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TY
             bug_type = callback_data.split("_")[1] if callback_data != "bug_problem" else "problem"
             await bug_reporter.handle_bug_type_selection(update, context, bug_type)
         elif callback_data == "bug_my_reports":
-            await query.edit_message_text("📋 Функция просмотра отчетов в разработке")
+            # Временная заглушка - показываем что функция не готова
+            await query.edit_message_text(
+                "📋 **Мои отчеты**\n\n"
+                "⚠️ Функция в разработке\n\n"
+                "Пока все отчеты отправляются напрямую админу для быстрого реагирования.\n"
+                "Система истории отчетов будет добавлена в следующих версиях.",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("⬅️ Назад", callback_data="bug_cancel")]
+                ]),
+                parse_mode='Markdown'
+            )
 
 async def handle_booking_response(update: Update, context: ContextTypes.DEFAULT_TYPE, callback_data: str) -> None:
     """Обрабатывает подтверждение или отклонение записи мастером."""
@@ -1066,10 +1076,19 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await process_new_profile(update, context)
         return
     
-    # Обрабатываем описание бага
+    # Обрабатываем описание бага (но сначала проверяем что это не системная кнопка)
     if 'bug_report' in context.user_data:
-        await bug_reporter.handle_bug_description(update, context)
-        return
+        # Список системных кнопок, которые должны работать даже во время багрепорта
+        system_buttons = [CHANGE_ROLE, BACK_TO_MENU, MASTER_ROLE, CLIENT_ROLE]
+        
+        if text not in system_buttons:
+            await bug_reporter.handle_bug_description(update, context)
+            return
+        else:
+            # Если это системная кнопка - очищаем состояние багрепорта и обрабатываем кнопку
+            if 'bug_report' in context.user_data:
+                del context.user_data['bug_report']
+            # Продолжаем обработку кнопки ниже
     
     # Обрабатываем добавление слотов
     if user_state.get("awaiting") == "add_slots":

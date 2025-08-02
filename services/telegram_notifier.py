@@ -15,7 +15,8 @@ logger = logging.getLogger(__name__)
 
 class TelegramNotifier:
     def __init__(self, admin_id: int = 78273571):
-        self.bot_token = os.getenv("BOT_TOKEN")
+        # Используем тот же токен что и основной бот
+        self.bot_token = os.getenv("TELEGRAM_TOKEN") or os.getenv("BOT_TOKEN")
         self.admin_id = admin_id
         self.bot = Bot(token=self.bot_token) if self.bot_token else None
         self.pending_notifications = []
