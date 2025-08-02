@@ -13,7 +13,14 @@ logger = logging.getLogger(__name__)
 
 class GPTBugAnalyzer:
     def __init__(self):
-        self.openai_client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        api_key = os.getenv("OPENAI_API_KEY")
+        if api_key:
+            self.openai_client = openai.OpenAI(api_key=api_key)
+            self.fallback_mode = False
+        else:
+            self.openai_client = None
+            self.fallback_mode = True
+            logger.warning("GPTBugAnalyzer работает в fallback режиме (нет OPENAI_API_KEY)")
         self.codebase_context = self._load_codebase_context()
         
     def _load_codebase_context(self) -> str:
@@ -263,4 +270,9 @@ class GPTBugAnalyzer:
         }
 
 # Создаем глобальный экземпляр
-gpt_bug_analyzer = GPTBugAnalyzer()
+# Безопасное создание экземпляра (не падает без API ключа)
+try:
+    gpt_bug_analyzer = GPTBugAnalyzer()
+except Exception as e:
+    logger.error(f"Ошибка создания GPTBugAnalyzer: {e}")
+    gpt_bug_analyzer = None
